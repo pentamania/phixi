@@ -1,0 +1,17 @@
+{
+  "name": "phixi",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/phixi.js",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pixi.js",
+    "phina.js"
+  ],
+  "author": "pentamania",
+  "license": "MIT"
+}
