@@ -1,10 +1,9 @@
 import { utils, Ticker as PixiTicker, Renderer } from 'pixi.js';
-import phina from 'phina.js';
+import { Ticker as PhinaTicker } from 'phina.js';
 import { Updater } from './Updater';
 import { Scene } from './Scene';
 import { PhinaEvent, RendererOptions } from './types';
 import { toHex } from './utils';
-const { Ticker: PhinaTicker } = phina.util;
 
 export interface BaseAppOptions extends RendererOptions {
   fps?: number;
@@ -20,7 +19,7 @@ const DEFAULT_PARAMS = {
 export class BaseApp extends utils.EventEmitter {
   renderer: Renderer;
   updater: Updater;
-  ticker = new PhinaTicker(); // 更新用ticker： 任意のタイミングで更新
+  ticker: phina.util.Ticker = new PhinaTicker(); // 更新用ticker： 任意のタイミングで更新
   drawTicker = new PixiTicker(); // 描画用ticker：RAFベース（端末によって更新タイミング変わる）
   private _scenes: Scene<BaseApp>[] = [new Scene()];
   private _sceneIndex: number = 0;

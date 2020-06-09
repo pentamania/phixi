@@ -1,5 +1,5 @@
 import { DisplayObject } from 'pixi.js';
-import phina from 'phina.js';
+import { Tweener } from 'phina.js';
 import { addGetter, addMethod, addAccessor } from './utils';
 import { PhinaEvent } from '../types';
 import { BaseApp } from '../BaseApp';
@@ -169,9 +169,9 @@ addMethod(
  */
 addGetter(DisplayObject.prototype, 'tweener', function () {
   if (!this._tweener) {
-    this._tweener = phina.accessory
-      .Tweener()
-      .attachTo((this as unknown) as phina.app.Element);
+    this._tweener = new Tweener().attachTo(
+      (this as unknown) as phina.app.Element
+    );
   }
   return this._tweener;
 });
