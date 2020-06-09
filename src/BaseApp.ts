@@ -33,7 +33,11 @@ export class BaseApp extends EventEmitter {
     
     // REVIEW: 旧版用パラメータ使用中
     // this.renderer = PIXI.autoDetectRenderer(params) as PIXI.WebGLRenderer;
-    this.renderer = PIXI.autoDetectRenderer(params.width, params.height, params) as PIXI.WebGLRenderer;
+    this.renderer = PIXI.autoDetectRenderer(
+      params.width as number, 
+      params.height as number, 
+      params
+    ) as PIXI.WebGLRenderer;
 
     // ticker, updaterのセットアップ
     if (params.fps) this.ticker.fps = params.fps;

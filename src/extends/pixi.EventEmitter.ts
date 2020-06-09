@@ -5,8 +5,8 @@ import { addMethod } from "./utils"
 /**
  * PIXI.utils.EventEmitter.flare
  */
-addMethod(PIXI.utils.EventEmitter.prototype, "flare", function (...args) {
-  return this.emit.call(this, ...args);
+addMethod(PIXI.utils.EventEmitter.prototype, "flare", function (event: string | symbol, ...args) {
+  return this.emit.call(this, event, ...args);
 })
 
 // PIXI.utils.EventEmitter.prototype.has = function(eventName) {

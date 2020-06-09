@@ -7,7 +7,7 @@ const Container = PIXI.Container
 export class Scene<A extends BaseApp = BaseApp> extends Container {
 
   // enter後にアクセス可能
-  protected _app: A = null
+  protected _app: A | undefined
 
   constructor() {
     super();
@@ -30,7 +30,7 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
    * @property app
    * TODO: _appが存在しないときはエラー吐く？
    */
-  get app(): A { return this._app }
+  get app(): A | undefined { return this._app }
 
   get screenWidth() {
     if (this._app) {

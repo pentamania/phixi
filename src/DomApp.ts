@@ -1,6 +1,6 @@
 import * as phina from "phina.js";
 import { BaseApp } from "./BaseApp";
-import { PhinaEvent } from "./types";
+import { PhinaEvent, PhinaKeyBoardEvent } from "./types";
 import { AppParam } from "./types";
 const {
   Mouse: MouseInput, // m as n の代わり
@@ -14,13 +14,12 @@ const {
  * ただしaccelerometerはない
  */
 export class DomApp extends BaseApp {
-  // TODO:型
-  mouse;
-  touch;
-  touchList;
-  keyboard;
-  pointer;
-  pointers: any[];
+  mouse: phina.input.Mouse;
+  touch: phina.input.Touch;
+  touchList: phina.input.TouchList;
+  keyboard: phina.input.Keyboard;
+  pointer: phina.input.Touch | phina.input.Mouse;
+  pointers: (phina.input.Touch | phina.input.Mouse)[];
 
   constructor(params?: AppParam) {
     super(params);
@@ -28,7 +27,8 @@ export class DomApp extends BaseApp {
     // interaction setup
     this.mouse = new MouseInput(this.domElement);
     this.touch = new Touch(this.domElement, false);
-    this.touchList = new TouchList(this.domElement);
+    // TODO: fix phina.js.d.ts TouchList assign
+    this.touchList = new TouchList(this.domElement) as unknown as phina.input.TouchList;
     this.keyboard = new Keyboard(document.body);
 
     // ポインタをセット(PCではMouse, MobileではTouch)
@@ -36,33 +36,33 @@ export class DomApp extends BaseApp {
     this.pointers = this.touchList.touches;
     this.domElement.addEventListener(
       "touchstart",
-      function () {
+      ()=> {
         this.pointer = this.touch;
         this.pointers = this.touchList.touches;
-      }.bind(this)
+      }
     );
     this.domElement.addEventListener(
       "mouseover",
-      function () {
+      () => {
         this.pointer = this.mouse;
         this.pointers = [this.mouse];
-      }.bind(this)
+      }
     );
 
     // keyboard event
-    this.keyboard.on("keydown", (e) => {
+    this.keyboard.on("keydown", (e: PhinaKeyBoardEvent) => {
       this.currentScene &&
         this.currentScene.emit("keydown", {
           keyCode: e.keyCode,
         });
     });
-    this.keyboard.on("keyup", (e) => {
+    this.keyboard.on("keyup", (e: PhinaKeyBoardEvent) => {
       this.currentScene &&
         this.currentScene.emit("keyup", {
           keyCode: e.keyCode,
         });
     });
-    this.keyboard.on("keypress", (e) => {
+    this.keyboard.on("keypress", (e: PhinaKeyBoardEvent) => {
       this.currentScene &&
         this.currentScene.emit("keypress", {
           keyCode: e.keyCode,

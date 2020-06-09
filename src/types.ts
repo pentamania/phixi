@@ -12,6 +12,10 @@ export enum PhinaEvent {
   // ACCESSORY_DETACHED = "detached",
 }
 
+export interface PhinaKeyBoardEvent {
+  keyCode: KeyboardEvent["keyCode"]
+}
+
 export enum TweenerUpdateType {
   Normal = "normal",
   Delta = "delta",

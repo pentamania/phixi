@@ -37,7 +37,7 @@ export class Sprite extends PixiSprite {
   }
 
   static getTextureByKey(key: string) {
-    const resrc = phina.asset.AssetManager.get(AssetType.Pixi, key);
+    const resrc = phina.asset.AssetManager.get(AssetType.Pixi, key) as unknown as PIXI.loaders.Resource;
     if (resrc && resrc.texture) {
       return resrc.texture
     } else {

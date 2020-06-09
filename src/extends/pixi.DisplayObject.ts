@@ -16,6 +16,7 @@ addMethod(PIXI.DisplayObject.prototype, 'attach', function (accessory: phina.acc
   if (!this.accessories) {
     this.accessories = [];
     this.on(PhinaEvent.Enterframe, (e) => {
+      if (!this.accessories) return;
       this.accessories.forEach((accessory) => {
         accessory.update && accessory.update(e.app);
       });
@@ -40,7 +41,7 @@ addMethod(PIXI.DisplayObject.prototype, 'detach', function (accessory: phina.acc
   if (this.accessories) {
     // this.accessories.erase(accessory);
     this.accessories.splice(this.accessories.indexOf(accessory), 1);
-    accessory.setTarget(null);
+    accessory.target = undefined;
     accessory.flare(PhinaEvent.AccessoryDetached);
   }
   return this;
