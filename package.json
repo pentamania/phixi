@@ -2,16 +2,30 @@
   "name": "phixi",
   "version": "0.1.0",
   "description": "",
+  "author": "pentamania",
+  "license": "MIT",
   "main": "dist/phixi.js",
   "module": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist",
+    "lib",
+    "src",
+    "types"
+  ],
   "keywords": [
     "pixi.js",
     "phina.js"
   ],
-  "author": "pentamania",
-  "license": "MIT"
+  "peerDependencies": {
+    "phina.js": "0.2.x",
+    "pixi.js": "4.x"
+  },
+  "dependencies": {
+    "@types/pixi.js": "^4.8.9",
+    "phina.js.d.ts": "github:negiwine/phina.js.d.ts"
+  }
 }
