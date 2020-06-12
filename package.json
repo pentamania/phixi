@@ -31,11 +31,12 @@
     "pixi.js": "5.x"
   },
   "dependencies": {
-    "@types/phina.js": "github:negiwine/phina.js.d.ts"
+    "phina.js.d.ts": "github:negiwine/phina.js.d.ts"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^2.3.3",
     "pixi.js": "^5.3.0",
+    "phina.js": "github:pentamania/phina.js#pxb-core",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.26.6",
