@@ -1,11 +1,9 @@
-import * as PIXI from "pixi.js";
+import { utils, Ticker as PixiTicker, Renderer } from "pixi.js";
 import * as phina from "phina.js";
 import { Updater } from "./Updater";
 import { Scene } from "./Scene";
 import { PhinaEvent } from "./types";
 import { AppParam } from "./types";
-const EventEmitter = PIXI.utils.EventEmitter;
-const PixiTicker = PIXI.ticker.Ticker;
 const {
   Ticker: PhinaTicker,
 } = phina.util;
@@ -17,8 +15,8 @@ const DEFAULT_PARAMS = {
 /**
  * @class BaseApp
  */
-export class BaseApp extends EventEmitter {
-  renderer: PIXI.WebGLRenderer;
+export class BaseApp extends utils.EventEmitter {
+  renderer: Renderer;
   updater: Updater;
   ticker = new PhinaTicker(); // 更新用ticker： 任意のタイミングで更新
   drawTicker = new PixiTicker(); // 描画用ticker：RAFベース（端末によって更新タイミング変わる）
@@ -30,14 +28,8 @@ export class BaseApp extends EventEmitter {
   constructor(params?: AppParam) {
     super();
     params = Object.assign({}, DEFAULT_PARAMS, params);
-    
-    // REVIEW: 旧版用パラメータ使用中
-    // this.renderer = PIXI.autoDetectRenderer(params) as PIXI.WebGLRenderer;
-    this.renderer = PIXI.autoDetectRenderer(
-      params.width as number, 
-      params.height as number, 
-      params
-    ) as PIXI.WebGLRenderer;
+
+    this.renderer = new Renderer(params);
 
     // ticker, updaterのセットアップ
     if (params.fps) this.ticker.fps = params.fps;

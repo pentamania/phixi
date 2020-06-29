@@ -1,11 +1,11 @@
 /// <reference path='./pixi.js.extend.d.ts'/>
-import * as PIXI from "pixi.js"
+import { Container } from "pixi.js"
 import { addMethod } from "./utils"
 
 /**
  * PIXI.Container.setOrigin
  */
-addMethod<(PIXI.Container | PIXI.Sprite)>(PIXI.Container.prototype, "setOrigin", function (x: number, y: number) {
+addMethod<(PIXI.Container | PIXI.Sprite)>(Container.prototype, "setOrigin", function (x: number, y: number) {
   if ('anchor' in this) {
     this.anchor.set(x, y)
   } else if (this.pivot) {
@@ -17,7 +17,7 @@ addMethod<(PIXI.Container | PIXI.Sprite)>(PIXI.Container.prototype, "setOrigin",
 /**
  * PIXI.Container.addChildTo
  */
-addMethod(PIXI.Container.prototype, "addChildTo", function (parent: PIXI.Container) {
+addMethod(Container.prototype, "addChildTo", function (parent: PIXI.Container) {
   this.setParent(parent);
   return this;
 })
@@ -25,7 +25,7 @@ addMethod(PIXI.Container.prototype, "addChildTo", function (parent: PIXI.Contain
 /**
  * PIXI.Container.remove
  */
-addMethod(PIXI.Container.prototype, "remove", function () {
+addMethod(Container.prototype, "remove", function () {
   this.parent.removeChild(this)
   // this.emit(PhinaEvent.Removed) // 元々removedイベントはpixiも発火するため不要
   return this;

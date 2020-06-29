@@ -22,11 +22,12 @@
   ],
   "peerDependencies": {
     "phina.js": "0.2.x",
-    "pixi.js": "4.x"
+    "pixi.js": "5.x"
   },
   "dependencies": {
-    "@types/phina.js": "github:negiwine/phina.js.d.ts",
-    "@types/pixi.js": "^4.8.9"
+    "@types/phina.js": "github:negiwine/phina.js.d.ts"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "pixi.js": "^5.3.0"
+  }
 }

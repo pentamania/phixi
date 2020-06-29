@@ -1,5 +1,5 @@
 /// <reference path='./pixi.js.extend.d.ts'/>
-import * as PIXI from "pixi.js"
+import { DisplayObject } from "pixi.js"
 import * as phina from "phina.js"
 import { addGetter, addMethod, addAccessor } from "./utils"
 import { PhinaEvent } from "../types";
@@ -12,7 +12,7 @@ import { PhinaEvent } from "../types";
  * @param accessory phina.accessory.Accessory派生クラス（tweenerなど）
  * @returns this
  */
-addMethod(PIXI.DisplayObject.prototype, 'attach', function (accessory: phina.accessory.Accessory) {
+addMethod(DisplayObject.prototype, 'attach', function (accessory: phina.accessory.Accessory) {
   if (!this.accessories) {
     this.accessories = [];
     this.on(PhinaEvent.Enterframe, (e) => {
@@ -37,7 +37,7 @@ addMethod(PIXI.DisplayObject.prototype, 'attach', function (accessory: phina.acc
  * @param accessory phina.accessory.Accessory派生クラス（tweenerなど）
  * @returns this
  */
-addMethod(PIXI.DisplayObject.prototype, 'detach', function (accessory: phina.accessory.Accessory) {
+addMethod(DisplayObject.prototype, 'detach', function (accessory: phina.accessory.Accessory) {
   if (this.accessories) {
     // this.accessories.erase(accessory);
     this.accessories.splice(this.accessories.indexOf(accessory), 1);
@@ -51,7 +51,7 @@ addMethod(PIXI.DisplayObject.prototype, 'detach', function (accessory: phina.acc
  * PIXI.DisplayObject getter
  * tweener
  */
-addGetter(PIXI.DisplayObject.prototype, 'tweener', function () {
+addGetter(DisplayObject.prototype, 'tweener', function () {
   if (!this._tweener) {
     this._tweener = phina.accessory.Tweener().attachTo(this as unknown as phina.app.Element);
   }
@@ -62,7 +62,7 @@ addGetter(PIXI.DisplayObject.prototype, 'tweener', function () {
  * PIXI.DisplayObject getter
  * scaleX
  */
-addAccessor(PIXI.DisplayObject.prototype, "scaleX", {
+addAccessor(DisplayObject.prototype, "scaleX", {
   get: function () { return this.scale.x },
   set: function (v: number) { this.scale.x = v },
 })
@@ -71,7 +71,7 @@ addAccessor(PIXI.DisplayObject.prototype, "scaleX", {
  * PIXI.DisplayObject getter
  * scaleY
  */
-addAccessor(PIXI.DisplayObject.prototype, "scaleY", {
+addAccessor(DisplayObject.prototype, "scaleY", {
   get: function () { return this.scale.y },
   set: function (v: number) { this.scale.y = v },
 })
@@ -79,7 +79,7 @@ addAccessor(PIXI.DisplayObject.prototype, "scaleY", {
 /**
  * PIXI.DisplayObject.setPosition
  */
-addMethod(PIXI.DisplayObject.prototype, "setPosition", function (x: number = 0, y: number = 0) {
+addMethod(DisplayObject.prototype, "setPosition", function (x: number = 0, y: number = 0) {
   this.position.set(x, y);
   return this;
 })
@@ -87,7 +87,7 @@ addMethod(PIXI.DisplayObject.prototype, "setPosition", function (x: number = 0, 
 /**
  * PIXI.DisplayObject.setScale
  */
-addMethod(PIXI.DisplayObject.prototype, "setScale", function (x: number, y = x) {
+addMethod(DisplayObject.prototype, "setScale", function (x: number, y = x) {
   this.scale.set(x, y);
   return this;
 })
@@ -95,7 +95,7 @@ addMethod(PIXI.DisplayObject.prototype, "setScale", function (x: number, y = x) 
 /**
  * PIXI.DisplayObject.setAlpha
  */
-addMethod(PIXI.DisplayObject.prototype, "setAlpha", function (a: number) {
+addMethod(DisplayObject.prototype, "setAlpha", function (a: number) {
   this.alpha = a;
   return this;
 })
@@ -103,7 +103,7 @@ addMethod(PIXI.DisplayObject.prototype, "setAlpha", function (a: number) {
 /**
  * PIXI.DisplayObject.setVisible
  */
-addMethod(PIXI.DisplayObject.prototype, "setVisible", function (flag: boolean) {
+addMethod(DisplayObject.prototype, "setVisible", function (flag: boolean) {
   this.visible = flag;
   return this;
 })
@@ -111,7 +111,7 @@ addMethod(PIXI.DisplayObject.prototype, "setVisible", function (flag: boolean) {
 /**
  * PIXI.DisplayObject.setInteractive
  */
-addMethod(PIXI.DisplayObject.prototype, "setInteractive", function (flag: boolean) {
+addMethod(DisplayObject.prototype, "setInteractive", function (flag: boolean) {
   this.interactive = flag;
   return this;
 })

@@ -1,4 +1,4 @@
-import * as PIXI from "pixi.js"
+import { Loader } from "pixi.js"
 
 /**
  * pixi.js関係のアセットをロード
@@ -11,9 +11,9 @@ import * as PIXI from "pixi.js"
 export function loadPixiAsset(
   key: string, 
   path: string
-): Promise<PIXI.loaders.Resource> {
+): Promise<PIXI.LoaderResource> {
   return new Promise((resolve)=> {
-    const pixiLoader = new PIXI.loaders.Loader();
+    const pixiLoader = new Loader();
     pixiLoader.add(key, path).load((_loader, resources) => {
       resolve(resources[key]);
     });

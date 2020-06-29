@@ -1,5 +1,5 @@
+import { Container } from "pixi.js"
 import { BaseApp } from "./BaseApp";
-const Container = PIXI.Container
 
 /**
  * Phixi.Sceneクラス

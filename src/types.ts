@@ -1,4 +1,6 @@
-export interface AppParam extends PIXI.RendererOptions {
+import { RendererOptions } from "pixi.js";
+
+export interface AppParam extends RendererOptions {
   fps?: number
 }
 

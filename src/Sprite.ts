@@ -1,8 +1,7 @@
-import * as PIXI from "pixi.js";
+import { Sprite as PixiSprite } from "pixi.js"
 import * as phina from "phina.js";
 import { AssetType } from "./types";
 
-const PixiSprite = PIXI.Sprite
 type TextureOrKey = PIXI.Texture | string
 
 /**
@@ -37,7 +36,7 @@ export class Sprite extends PixiSprite {
   }
 
   static getTextureByKey(key: string) {
-    const resrc = phina.asset.AssetManager.get(AssetType.Pixi, key) as unknown as PIXI.loaders.Resource;
+    const resrc = phina.asset.AssetManager.get(AssetType.Pixi, key) as unknown as PIXI.LoaderResource;
     if (resrc && resrc.texture) {
       return resrc.texture
     } else {
@@ -46,7 +45,7 @@ export class Sprite extends PixiSprite {
     }
   }
 
-  static from(source: string | number | PIXI.BaseTexture | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement) {
+  static from(source: string | PIXI.Texture | HTMLCanvasElement | HTMLVideoElement) {
     return PixiSprite.from(source)
   }
 

@@ -4,7 +4,7 @@ interface PhinaAccessoryOverride extends phina.accessory.Accessory {
 
 declare namespace PIXI {
 
-  export interface DisplayObject extends utils.EventEmitter {
+  export interface DisplayObject {
 
     attach(accessory: phina.accessory.Accessory): this
 
