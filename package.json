@@ -25,7 +25,8 @@
     "pixi.js": "4.x"
   },
   "dependencies": {
-    "@types/pixi.js": "^4.8.9",
-    "phina.js.d.ts": "github:negiwine/phina.js.d.ts"
-  }
+    "@types/phina.js": "github:negiwine/phina.js.d.ts",
+    "@types/pixi.js": "^4.8.9"
+  },
+  "devDependencies": {}
 }
