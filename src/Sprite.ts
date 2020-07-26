@@ -1,4 +1,4 @@
-import { Sprite as PixiSprite } from "pixi.js"
+import { Sprite as PixiSprite, LoaderResource } from "pixi.js"
 import * as phina from "phina.js";
 import { AssetType } from "./types";
 
@@ -36,7 +36,7 @@ export class Sprite extends PixiSprite {
   }
 
   static getTextureByKey(key: string) {
-    const resrc = phina.asset.AssetManager.get(AssetType.Pixi, key) as unknown as PIXI.LoaderResource;
+    const resrc = phina.asset.AssetManager.get(AssetType.Pixi, key) as unknown as LoaderResource;
     if (resrc && resrc.texture) {
       return resrc.texture
     } else {

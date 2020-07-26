@@ -1,4 +1,20 @@
-import { RendererOptions } from "pixi.js";
+// import { RendererOptions } from "pixi.js"; 
+
+// 以前はあったはず…？だが、無いので直接コピペ
+type RendererOptions = {
+  width?: number;
+  height?: number;
+  view?: HTMLCanvasElement;
+  transparent?: boolean;
+  autoDensity?: boolean;
+  antialias?: boolean;
+  resolution?: number;
+  clearBeforeRender?: boolean;
+  preserveDrawingBuffer?: boolean;
+  backgroundColor?: number;
+  powerPreference?: string;
+  context?: any;
+}
 
 export interface AppParam extends RendererOptions {
   fps?: number
