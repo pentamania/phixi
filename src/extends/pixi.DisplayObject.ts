@@ -3,6 +3,7 @@ import { DisplayObject } from "pixi.js"
 import * as phina from "phina.js"
 import { addGetter, addMethod, addAccessor } from "./utils"
 import { PhinaEvent } from "../types";
+import { BaseApp } from "../BaseApp";
 
 /**
  * PIXI.DisplayObject.attach
@@ -15,7 +16,7 @@ import { PhinaEvent } from "../types";
 addMethod(DisplayObject.prototype, 'attach', function (accessory: phina.accessory.Accessory) {
   if (!this.accessories) {
     this.accessories = [];
-    this.on(PhinaEvent.Enterframe, (e) => {
+    this.on(PhinaEvent.Enterframe, (e: {app: BaseApp}) => {
       if (!this.accessories) return;
       this.accessories.forEach((accessory) => {
         accessory.update && accessory.update(e.app);
