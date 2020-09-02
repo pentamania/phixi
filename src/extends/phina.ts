@@ -1,4 +1,4 @@
-import * as phina from "phina.js"
+import phina from "phina.js"
 import { AssetType } from "../types";
 import { loadPixiAsset } from "../helpers";
 

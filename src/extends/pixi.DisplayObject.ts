@@ -1,6 +1,6 @@
 /// <reference path='./pixi.js.extend.d.ts'/>
 import { DisplayObject } from "pixi.js"
-import * as phina from "phina.js"
+import phina from "phina.js"
 import { addGetter, addMethod, addAccessor } from "./utils"
 import { PhinaEvent } from "../types";
 import { BaseApp } from "../BaseApp";

@@ -1,5 +1,5 @@
 import { utils, Ticker as PixiTicker, Renderer } from "pixi.js";
-import * as phina from "phina.js";
+import phina from "phina.js";
 import { Updater } from "./Updater";
 import { Scene } from "./Scene";
 import { PhinaEvent } from "./types";

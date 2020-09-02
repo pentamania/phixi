@@ -1,4 +1,4 @@
-import * as phina from "phina.js";
+import phina from "phina.js";
 import { BaseApp } from "./BaseApp";
 import { PhinaEvent, PhinaKeyBoardEvent } from "./types";
 import { AppParam } from "./types";

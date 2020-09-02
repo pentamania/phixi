@@ -1,5 +1,5 @@
 import { Sprite as PixiSprite, LoaderResource } from "pixi.js"
-import * as phina from "phina.js";
+import phina from "phina.js";
 import { AssetType } from "./types";
 
 type TextureOrKey = PIXI.Texture | string
