@@ -1,6 +1,32 @@
-/// <reference path='./pixi.js.extend.d.ts'/>
 import { Container } from "pixi.js"
 import { addMethod } from "./utils"
+
+declare module 'pixi.js' {
+  export interface Container {
+
+    /**
+     * Sets pivot or anchor (if exists, i.e. Sprite class) of the object.
+     * Chainable
+     */
+    setOrigin(x: number, y: number): this;
+
+    /**
+     * Set the parent Container of this DisplayObject.
+     * Similar to 'setParent', but this method returns itself and is chainable
+     *
+     * @param {PIXI.Container} container - The Container which is added
+     * @returns {this} Returns itself.
+     */
+    addChildTo(container: PIXI.Container): this;
+
+    /**
+     * Remove itself from the parent.
+     *
+     * @returns {this} Returns itself.
+     */
+    remove(): this;
+  }
+}
 
 /**
  * PIXI.Container.setOrigin
