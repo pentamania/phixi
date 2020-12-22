@@ -20,7 +20,7 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
    * @virtual
    * @param app 
    */
-  onUpdate(app: A) {}
+  onUpdate(app?: A) {}
 
   setApp(app: A) {
     this._app = app;

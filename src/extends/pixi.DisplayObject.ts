@@ -42,7 +42,7 @@ declare module "pixi.js" {
      * App-class driven update function.
      * Run by Updater if defined
      */
-    onUpdate?(app: any): any;
+    onUpdate?(app?: any): any;
     // update?(app: any): any
 
     /**
