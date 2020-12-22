@@ -7,7 +7,7 @@ import { BaseApp } from "./BaseApp";
 export class Scene<A extends BaseApp = BaseApp> extends Container {
 
   // enter後にアクセス可能
-  protected _app: A | undefined
+  protected _app?: A | null
 
   constructor() {
     super();
@@ -20,9 +20,9 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
    * @virtual
    * @param app 
    */
-  onUpdate(app?: A) {}
+  onUpdate(_app?: A) {}
 
-  setApp(app: A) {
+  setApp(app: A | null) {
     this._app = app;
   }
 
@@ -30,7 +30,7 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
    * @property app
    * TODO: _appが存在しないときはエラー吐く？
    */
-  get app(): A | undefined { return this._app }
+  get app() { return this._app }
 
   get screenWidth() {
     if (this._app) {

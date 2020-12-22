@@ -21,13 +21,26 @@ export interface AppParam extends RendererOptions {
 }
 
 export enum PhinaEvent {
+  // Element events
   Enterframe = "enterframe",
-  EnterScene = "enter",
   AccessoryAttached = "attached",
   AccessoryDetached = "detached",
-  Removed = "removed",
   // ACCESSORY_ATTACHED = "attached",
   // ACCESSORY_DETACHED = "detached",
+  Removed = "removed",
+
+  // Scene events
+  EnterScene = "enter",
+  ExitScene = "exit",
+  ScenePaused = "pause",
+
+  // App events
+  AppChangeScene = "changescene",
+  AppPushScene = "push",
+  AppScenePushed = "pushed",
+  AppPopScene = "pop",
+  AppScenePoped = "poped",
+  AppResume = "resume",
 }
 
 export interface PhinaKeyBoardEvent {
