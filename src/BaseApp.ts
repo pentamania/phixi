@@ -1,13 +1,14 @@
-import { utils, Ticker as PixiTicker, Renderer } from "pixi.js";
-import phina from "phina.js";
-import { Updater } from "./Updater";
-import { Scene } from "./Scene";
-import { PhinaEvent } from "./types";
-import { AppParam } from "./types";
-const {
-  Ticker: PhinaTicker,
-} = phina.util;
+import { utils, Ticker as PixiTicker, Renderer } from 'pixi.js';
+import phina from 'phina.js';
+import { Updater } from './Updater';
+import { Scene } from './Scene';
+import { PhinaEvent, RendererOptions } from './types';
 import { toHex } from './utils';
+const { Ticker: PhinaTicker } = phina.util;
+
+export interface BaseAppOptions extends RendererOptions {
+  fps?: number;
+}
 
 const DEFAULT_PARAMS = {
   fps: 60,
@@ -27,7 +28,7 @@ export class BaseApp extends utils.EventEmitter {
   /**
    * @param params 
    */
-  constructor(params?: AppParam) {
+  constructor(params?: BaseAppOptions) {
     super();
     params = Object.assign({}, DEFAULT_PARAMS, params);
 
@@ -142,14 +143,7 @@ export class BaseApp extends utils.EventEmitter {
     });
     scene.setApp(null);
 
-    this.flare(PhinaEvent.AppScenePoped)
-
-    // ManagerScene向け
-    // TODO: this.currentSceneのinstanceofがManagerSceneの時のみの処理
-    // this.currentScene.flare('resume', {
-    //   app: this,
-    //   prevScene: scene,
-    // });
+    this.flare(PhinaEvent.AppScenePoped);
 
     return scene;
   }

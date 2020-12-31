@@ -1,7 +1,6 @@
 import phina from "phina.js";
-import { BaseApp } from "./BaseApp";
+import { BaseApp, BaseAppOptions } from "./BaseApp";
 import { PhinaEvent, PhinaKeyBoardEvent } from "./types";
-import { AppParam } from "./types";
 const {
   Mouse: MouseInput, // m as n の代わり
   Touch, 
@@ -11,6 +10,7 @@ const {
 
 /**
  * phina.app.DomAppクラスに相当
+ * domElement(renderer.view)に各種Inputクラスを付与する
  * ただしaccelerometerはない
  */
 export class DomApp extends BaseApp {
@@ -21,7 +21,7 @@ export class DomApp extends BaseApp {
   pointer: phina.input.Touch | phina.input.Mouse;
   pointers: (phina.input.Touch | phina.input.Mouse)[];
 
-  constructor(params?: AppParam) {
+  constructor(params?: BaseAppOptions) {
     super(params);
 
     // interaction setup

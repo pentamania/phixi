@@ -1,7 +1,7 @@
 // import { RendererOptions } from "pixi.js"; 
 
 // 以前はあったはず…？だが、無いので直接コピペ
-type RendererOptions = {
+export type RendererOptions = {
   width?: number;
   height?: number;
   view?: HTMLCanvasElement;
@@ -14,10 +14,6 @@ type RendererOptions = {
   backgroundColor?: number;
   powerPreference?: string;
   context?: any;
-}
-
-export interface AppParam extends RendererOptions {
-  fps?: number
 }
 
 export enum PhinaEvent {
@@ -33,6 +29,8 @@ export enum PhinaEvent {
   EnterScene = "enter",
   ExitScene = "exit",
   ScenePaused = "pause",
+  // 
+  LoadingSceneLoaded = "loaded",
 
   // App events
   AppChangeScene = "changescene",
@@ -41,6 +39,7 @@ export enum PhinaEvent {
   AppPopScene = "pop",
   AppScenePoped = "poped",
   AppResume = "resume",
+
 }
 
 export interface PhinaKeyBoardEvent {
@@ -57,4 +56,10 @@ export enum AssetType {
   Pixi = "pixi",
   // Image = "image",
   // Sound = "sound",
+}
+
+export interface PhinaAssetLoaderLoadParam {
+  [assetType: string]: {
+    [assetKey: string]: string;
+  };
 }
