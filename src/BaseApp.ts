@@ -7,6 +7,7 @@ import { AppParam } from "./types";
 const {
   Ticker: PhinaTicker,
 } = phina.util;
+import { toHex } from './utils';
 
 const DEFAULT_PARAMS = {
   fps: 60,
@@ -187,5 +188,9 @@ export class BaseApp extends utils.EventEmitter {
    */
   get fps(): number {
     return this.ticker.fps;
+  }
+
+  set backgroundColor(v: number | string) {
+    this.renderer.backgroundColor = toHex(v);
   }
 }
