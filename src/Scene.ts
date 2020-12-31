@@ -32,9 +32,33 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
    */
   get app() { return this._app }
 
+  /**
+   * 表示canvas要素領域の幅
+   * scene enter後でないとアクセス不可
+   */
+  get viewportWidth() {
+    if (!this._app) {
+      // TODO warn
+      return 0;
+    }
+    return this._app.renderer.view.width;
+  }
+
+  /**
+   * 表示canvas要素領域の高さ
+   * scene enter後でないとアクセス不可
+   */
+  get viewportHeight() {
+    if (!this._app) {
+      // TODO warn
+      return 0;
+    }
+    return this._app.renderer.view.width;
+  }
+
   get screenWidth() {
     if (this._app) {
-      return this._app.renderer.screen.width
+      return this._app.renderer.screen.width;
     } else {
       // Container.widthを返す。childrenの状態によって変わる
       return this.width;
@@ -43,7 +67,7 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
 
   get screenHeight() {
     if (this._app) {
-      return this._app.renderer.screen.height
+      return this._app.renderer.screen.height;
     } else {
       return this.height;
     }
