@@ -1,11 +1,11 @@
-import phina from "phina.js";
-import { BaseApp, BaseAppOptions } from "./BaseApp";
-import { PhinaEvent, PhinaKeyBoardEvent } from "./types";
+import phina from 'phina.js';
+import { BaseApp, BaseAppOptions } from './BaseApp';
+import { PhinaEvent, PhinaKeyBoardEvent } from './types';
 const {
   Mouse: MouseInput, // m as n の代わり
-  Touch, 
-  TouchList, 
-  Keyboard 
+  Touch,
+  TouchList,
+  Keyboard,
 } = phina.input;
 
 /**
@@ -28,43 +28,39 @@ export class DomApp extends BaseApp {
     this.mouse = new MouseInput(this.domElement);
     this.touch = new Touch(this.domElement, false);
     // TODO: fix phina.js.d.ts TouchList assign
-    this.touchList = new TouchList(this.domElement) as unknown as phina.input.TouchList;
+    this.touchList = (new TouchList(
+      this.domElement
+    ) as unknown) as phina.input.TouchList;
     this.keyboard = new Keyboard(document.body);
 
     // ポインタをセット(PCではMouse, MobileではTouch)
     this.pointer = this.touch;
     this.pointers = this.touchList.touches;
-    this.domElement.addEventListener(
-      "touchstart",
-      ()=> {
-        this.pointer = this.touch;
-        this.pointers = this.touchList.touches;
-      }
-    );
-    this.domElement.addEventListener(
-      "mouseover",
-      () => {
-        this.pointer = this.mouse;
-        this.pointers = [this.mouse];
-      }
-    );
+    this.domElement.addEventListener('touchstart', () => {
+      this.pointer = this.touch;
+      this.pointers = this.touchList.touches;
+    });
+    this.domElement.addEventListener('mouseover', () => {
+      this.pointer = this.mouse;
+      this.pointers = [this.mouse];
+    });
 
     // keyboard event
-    this.keyboard.on("keydown", (e: PhinaKeyBoardEvent) => {
+    this.keyboard.on('keydown', (e: PhinaKeyBoardEvent) => {
       this.currentScene &&
-        this.currentScene.emit("keydown", {
+        this.currentScene.emit('keydown', {
           keyCode: e.keyCode,
         });
     });
-    this.keyboard.on("keyup", (e: PhinaKeyBoardEvent) => {
+    this.keyboard.on('keyup', (e: PhinaKeyBoardEvent) => {
       this.currentScene &&
-        this.currentScene.emit("keyup", {
+        this.currentScene.emit('keyup', {
           keyCode: e.keyCode,
         });
     });
-    this.keyboard.on("keypress", (e: PhinaKeyBoardEvent) => {
+    this.keyboard.on('keypress', (e: PhinaKeyBoardEvent) => {
       this.currentScene &&
-        this.currentScene.emit("keypress", {
+        this.currentScene.emit('keypress', {
           keyCode: e.keyCode,
         });
     });
@@ -79,20 +75,20 @@ export class DomApp extends BaseApp {
 
     // ウィンドウフォーカス時イベントリスナを登録
     window.addEventListener(
-      "focus",
+      'focus',
       () => {
-        this.emit("focus");
-        this.currentScene.emit("focus");
+        this.emit('focus');
+        this.currentScene.emit('focus');
       },
       false
     );
 
     // ウィンドウブラー時イベントリスナを登録
     window.addEventListener(
-      "blur",
+      'blur',
       () => {
-        this.emit("blur");
-        this.currentScene.emit("blur");
+        this.emit('blur');
+        this.currentScene.emit('blur');
       },
       false
     );

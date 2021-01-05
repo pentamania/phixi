@@ -23,10 +23,10 @@ export class BaseApp extends utils.EventEmitter {
   ticker = new PhinaTicker(); // 更新用ticker： 任意のタイミングで更新
   drawTicker = new PixiTicker(); // 描画用ticker：RAFベース（端末によって更新タイミング変わる）
   private _scenes: Scene<BaseApp>[] = [new Scene()];
-  private _sceneIndex: number  = 0;
+  private _sceneIndex: number = 0;
 
   /**
-   * @param params 
+   * @param params
    */
   constructor(params?: BaseAppOptions) {
     super();
@@ -67,7 +67,7 @@ export class BaseApp extends utils.EventEmitter {
     // if (this.currentScene != null) {
     //   this.renderer.render(this.currentScene);
     // }
-    this._scenes.forEach((scene, i)=> {
+    this._scenes.forEach((scene, i) => {
       if (i === 0) {
         // 最初のscene描画の時だけclear
         this.renderer.render(scene);
@@ -75,7 +75,7 @@ export class BaseApp extends utils.EventEmitter {
         // 後のsceneは上書き
         this.renderer.render(scene, undefined, false);
       }
-    })
+    });
   }
 
   run() {
@@ -97,10 +97,10 @@ export class BaseApp extends utils.EventEmitter {
 
   /**
    * scenesスタックにsceneを追加し、それをcurrentSceneとする
-   * - push前のsceneは保持され、popSceneメソッドで容易に戻ることが可能  
+   * - push前のsceneは保持され、popSceneメソッドで容易に戻ることが可能
    * - ポーズやオブション画面など一時的なSceneに使用
-   * 
-   * @param scene 
+   *
+   * @param scene
    */
   pushScene(scene: Scene) {
     this.flare(PhinaEvent.AppPushScene);
@@ -134,7 +134,7 @@ export class BaseApp extends utils.EventEmitter {
     const scene = this._scenes.pop();
     if (!scene) {
       // TODO: No scene error
-      return
+      return;
     }
     --this._sceneIndex;
 
@@ -168,7 +168,7 @@ export class BaseApp extends utils.EventEmitter {
     return this._scenes[this._sceneIndex];
   }
   set currentScene(v: Scene) {
-    this._scenes[this._sceneIndex] = v
+    this._scenes[this._sceneIndex] = v;
   }
 
   get frame(): number {

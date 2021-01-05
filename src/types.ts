@@ -1,4 +1,4 @@
-// import { RendererOptions } from "pixi.js"; 
+// import { RendererOptions } from "pixi.js";
 
 // 以前はあったはず…？だが、無いので直接コピペ
 export type RendererOptions = {
@@ -14,46 +14,45 @@ export type RendererOptions = {
   backgroundColor?: number;
   powerPreference?: string;
   context?: any;
-}
+};
 
 export enum PhinaEvent {
   // Element events
-  Enterframe = "enterframe",
-  AccessoryAttached = "attached",
-  AccessoryDetached = "detached",
+  Enterframe = 'enterframe',
+  AccessoryAttached = 'attached',
+  AccessoryDetached = 'detached',
   // ACCESSORY_ATTACHED = "attached",
   // ACCESSORY_DETACHED = "detached",
-  Removed = "removed",
+  Removed = 'removed',
 
   // Scene events
-  EnterScene = "enter",
-  ExitScene = "exit",
-  ScenePaused = "pause",
-  // 
-  LoadingSceneLoaded = "loaded",
+  EnterScene = 'enter',
+  ExitScene = 'exit',
+  ScenePaused = 'pause',
+  //
+  LoadingSceneLoaded = 'loaded',
 
   // App events
-  AppChangeScene = "changescene",
-  AppPushScene = "push",
-  AppScenePushed = "pushed",
-  AppPopScene = "pop",
-  AppScenePoped = "poped",
-  AppResume = "resume",
-
+  AppChangeScene = 'changescene',
+  AppPushScene = 'push',
+  AppScenePushed = 'pushed',
+  AppPopScene = 'pop',
+  AppScenePoped = 'poped',
+  AppResume = 'resume',
 }
 
 export interface PhinaKeyBoardEvent {
-  keyCode: KeyboardEvent["keyCode"]
+  keyCode: KeyboardEvent['keyCode'];
 }
 
 export enum TweenerUpdateType {
-  Normal = "normal",
-  Delta = "delta",
-  FPS = "fps",
+  Normal = 'normal',
+  Delta = 'delta',
+  FPS = 'fps',
 }
 
 export enum AssetType {
-  Pixi = "pixi",
+  Pixi = 'pixi',
   // Image = "image",
   // Sound = "sound",
 }

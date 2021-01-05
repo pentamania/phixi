@@ -5,8 +5,8 @@
  * @param strOrNum (ex. "#FF0033", "FF0033", 0xFF0033)
  */
 export function toHex(strOrNum: string | number): number {
-  if (typeof strOrNum === "string") {
-    if (strOrNum[0] === "#") strOrNum = strOrNum.slice(1);
+  if (typeof strOrNum === 'string') {
+    if (strOrNum[0] === '#') strOrNum = strOrNum.slice(1);
     return parseInt(strOrNum, 16);
   } else {
     // is already num

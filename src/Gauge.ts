@@ -1,5 +1,5 @@
-import { Graphics } from "pixi.js";
-import { toHex, clamp } from "./utils";
+import { Graphics } from 'pixi.js';
+import { toHex, clamp } from './utils';
 
 export interface GaugeOptions {
   width?: number;
@@ -23,7 +23,7 @@ const DEFAULT_COLOR_BG = 0x222222;
 
 /**
  * Gauge drawing class with PIXI.Graphics
- * 
+ *
  * ### TODO
  * - Add stroke drawing feature
  * - Add cornerRadius feature
@@ -110,7 +110,7 @@ export class Gauge extends Graphics {
    */
   setMax(v: number, updateVisualValueToo: number | boolean = true) {
     this._maxValue = v;
-    if (typeof updateVisualValueToo === "number") {
+    if (typeof updateVisualValueToo === 'number') {
       this._visualMaxValue = updateVisualValueToo;
     } else if (updateVisualValueToo === true) {
       this._visualMaxValue = v;
@@ -126,7 +126,7 @@ export class Gauge extends Graphics {
    */
   setMin(v: number, updateVisualValueToo: number | boolean = true) {
     this._minValue = v;
-    if (typeof updateVisualValueToo === "number") {
+    if (typeof updateVisualValueToo === 'number') {
       this._visualMinValue = updateVisualValueToo;
     } else if (updateVisualValueToo === true) {
       this._visualMinValue = v;
