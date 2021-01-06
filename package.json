@@ -1,7 +1,7 @@
 {
   "name": "phixi",
   "version": "0.1.0",
-  "description": "",
+  "description": "Bridge library to use pixi.js like phina.js",
   "author": "pentamania",
   "license": "MIT",
   "main": "lib/phixi.js",
