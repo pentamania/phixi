@@ -55,6 +55,11 @@ declare module 'pixi.js' {
     setScale(x: number, y?: number): this;
 
     /**
+     * Chainable object rotation setting method
+     */
+    setRotation(v: number): this;
+
+    /**
      * Chainable object alpha setting method
      */
     setAlpha(alpha: number): this;
@@ -188,6 +193,14 @@ addMethod(
  */
 addMethod(DisplayObject.prototype, 'setScale', function (x: number, y = x) {
   this.scale.set(x, y);
+  return this;
+});
+
+/**
+ * PIXI.DisplayObject.setRotation
+ */
+ addMethod(DisplayObject.prototype, 'setRotation', function (v: number) {
+  this.rotation = v;
   return this;
 });
 
