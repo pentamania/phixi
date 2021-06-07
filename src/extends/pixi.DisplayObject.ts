@@ -38,6 +38,19 @@ declare module 'pixi.js' {
     accessories?: PhinaAccessoryOverride[];
 
     /**
+     * Updating flag of the object.
+     * 
+     * When this property to set to `true`,
+     * core app's `Updater` will let this object
+     * emit "enterframe" event and tries to run 'onUpdate' method every frame.
+     * 
+     * Recursive update of children objects will be affected too.
+     * 
+     * @default true
+     */
+    awake: boolean;
+
+    /**
      * App-class driven update function.
      * Run by Updater if defined
      */
@@ -85,6 +98,12 @@ declare module 'pixi.js' {
     scaleY: number;
   }
 }
+
+
+/**
+ * PIXI.DisplayObject.awake
+ */
+ DisplayObject.prototype.awake = true;
 
 /**
  * PIXI.DisplayObject.attach
@@ -199,7 +218,7 @@ addMethod(DisplayObject.prototype, 'setScale', function (x: number, y = x) {
 /**
  * PIXI.DisplayObject.setRotation
  */
- addMethod(DisplayObject.prototype, 'setRotation', function (v: number) {
+addMethod(DisplayObject.prototype, 'setRotation', function (v: number) {
   this.rotation = v;
   return this;
 });

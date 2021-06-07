@@ -9,8 +9,21 @@ export class Updater {
     this.app = app;
   }
 
-  updateElement(obj: Container) {
-    // フレーム毎更新
+  /**
+   * This method will 
+   * 
+   * - let object emit "enterframe" event
+   * - run object's "onUpdate" method when it is defined
+   * 
+   * and recursively apply same method against child elements.
+   * 
+   * If object's "awake" prop is set to false, these processes will be skipped.
+   * 
+   * @param obj 
+   */
+  public updateElement(obj: Container) {
+    if (obj.awake === false) return;
+
     obj.emit(PhinaEvent.Enterframe, { app: this.app });
 
     // if (obj.update) obj.update(this.app);
