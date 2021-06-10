@@ -4,22 +4,33 @@ import { addMethod } from './utils';
 declare module 'pixi.js' {
   export interface Container {
     /**
-     * Sets pivot or anchor (if exists, i.e. Sprite class) of the object.
+     * Sets anchor or pivot of the object.
+     *
+     * This method is usually for setting `anchor` (in Sprite and it's subclasses),
+     * but will try to pretend same for objects that doesn't have `anchor` prop (i.e Graphics class)
+     * by updating `pivot` using `width` & `height` props.
+     *
+     * If neither `anchor` nor `pivot` don't exist, it will do nothing.
+     *
      * Chainable
+     *
+     * @param x origin point x: anchor.x or pivot.x will be updated
+     * @param y origin point y: anchor.y or pivot.y will be updated
+     * @returns Returns itself.
      */
     setOrigin(x: number, y: number): this;
 
     /**
      * Set the parent Container of this DisplayObject.
-     * Similar to 'setParent', but this method returns itself and is chainable
+     * Similar to 'setParent', but this method returns itself, which means chainable
      *
-     * @param {PIXI.Container} container - The Container which is added
-     * @returns {this} Returns itself.
+     * @param {PIXI.Container} parent - The Container which is added
+     * @returns Returns itself.
      */
-    addChildTo(container: PIXI.Container): this;
+    addChildTo(parent: PIXI.Container): this;
 
     /**
-     * Remove itself from the parent.
+     * Remove itself from it's parent.
      *
      * @returns {this} Returns itself.
      */
@@ -56,6 +67,8 @@ addMethod(Container.prototype, 'addChildTo', function (parent: PIXI.Container) {
  */
 addMethod(Container.prototype, 'remove', function () {
   this.parent.removeChild(this);
-  // this.emit(PhinaEvent.Removed) // 元々removedイベントはpixiも発火するため不要
+
+  // pixi will emit this in removeChild
+  // this.emit(PhinaEvent.Removed)
   return this;
 });
