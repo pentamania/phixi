@@ -53,6 +53,8 @@ export default function () {
 
   // Let Updater execute "update" too
   Updater.prototype.updateElement = function (obj: Container) {
+    if (obj.awake === false) return;
+
     obj.emit(PhinaEvent.Enterframe, { app: this.app });
 
     // Add
