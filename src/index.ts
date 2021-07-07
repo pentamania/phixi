@@ -5,3 +5,4 @@ export * from './Sprite';
 export * from './Gauge';
 export { PhinaEvent, TweenerUpdateType } from './types';
 export * from './GameApp';
+export { default as forcePhinaStyle } from './forcePhinaStyle/entry';
