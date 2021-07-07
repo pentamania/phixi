@@ -1,10 +1,22 @@
 import { Loader } from 'pixi.js';
 
 /**
- * pixi.js関係のアセットをロード
- * pixiのloaderは並列ロードができないため、アセットごとにloaderを生成する
- * TODO: エラーハンドリング
- * TODO: ローダーはキャッシュする？
+ * pixi.js loader wrapper function
+ *
+ * [EN]
+ * Generally used to load assets used in pixi.
+ *
+ * [JP]
+ * pixi.js関係のアセットをロードする際に使用
+ *
+ * @example
+ * (async ()=> {
+ *   const bunnyResrc = await loadPixiAsset('bunny', 'data/bunny.png')
+ *   new PIXI.TilingSprite(bunnyResrc.texture)
+ * })();
+ *
+ * Pixi Loader reference:
+ * https://pixijs.download/dev/docs/PIXI.Loader.html
  *
  * @param key
  * @param path
