@@ -39,13 +39,13 @@ declare module 'pixi.js' {
 
     /**
      * Updating flag of the object.
-     * 
+     *
      * When this property to set to `true`,
      * core app's `Updater` will let this object
      * emit "enterframe" event and tries to run 'onUpdate' method every frame.
-     * 
+     *
      * Recursive update of children objects will be affected too.
-     * 
+     *
      * @default true
      */
     awake: boolean;
@@ -99,11 +99,10 @@ declare module 'pixi.js' {
   }
 }
 
-
 /**
  * PIXI.DisplayObject.awake
  */
- DisplayObject.prototype.awake = true;
+DisplayObject.prototype.awake = true;
 
 /**
  * PIXI.DisplayObject.attach

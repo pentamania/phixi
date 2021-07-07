@@ -57,11 +57,11 @@ FrameAnimation.prototype._updateFrame = function (): void {
 };
 
 /**
- * @param texture 
+ * @param texture
  */
 function _cloneTexture(texture: PixiTextureOrKey): Texture {
   if (typeof texture === 'string') {
-    return Sprite.getTextureByKey(texture).clone()
+    return Sprite.getTextureByKey(texture).clone();
   } else {
     return texture.clone();
   }
