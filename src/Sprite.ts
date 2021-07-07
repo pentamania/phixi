@@ -8,6 +8,7 @@ import phina from 'phina.js';
 import { AssetType } from './types';
 const { FrameAnimation } = phina.accessory;
 const { AssetManager } = phina.asset;
+type PhinaSprite = phina.display.Sprite;
 
 type PixiTextureOrKey = Texture | string;
 
@@ -30,18 +31,29 @@ FrameAnimation.prototype._updateFrame = function (): void {
   var index = anim.frames[this.currentFrameIndex];
   var frame = this.ss.getFrame(index);
 
-  // this.target.srcRect.set(frame.x, frame.y, frame.width, frame.height);
-  const sprite = this.target as Sprite;
-  sprite.texture.frame.x = frame.x;
-  sprite.texture.frame.y = frame.y;
-  sprite.texture.frame.width = frame.width;
-  sprite.texture.frame.height = frame.height;
-  sprite.texture.updateUvs();
+  let sprite: PhinaSprite | PixiSprite = this.target;
+  if (
+    (sprite as PixiSprite).texture &&
+    (sprite as PixiSprite).texture instanceof Texture
+  ) {
+    sprite = sprite as PixiSprite;
+    sprite.texture.frame.x = frame.x;
+    sprite.texture.frame.y = frame.y;
+    sprite.texture.frame.width = frame.width;
+    sprite.texture.frame.height = frame.height;
+    sprite.texture.updateUvs();
+  } else {
+    // Original phina Sprite
+    // PhinaSprite should have srcRect, but is missed in phina.js.d.ts...
+    (sprite as any).srcRect.set(frame.x, frame.y, frame.width, frame.height);
+  }
 
-  // if (this.fit) {
-  //   this.target.width = frame.width;
-  //   this.target.height = frame.height;
-  // }
+  // Disable fitting
+  // Sprite width/height always matches with the frame in pixi.js
+  if (!(this.target instanceof PixiSprite) && this.fit) {
+    this.target.width = frame.width;
+    this.target.height = frame.height;
+  }
 };
 
 /**
