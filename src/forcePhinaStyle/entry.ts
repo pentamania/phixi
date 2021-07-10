@@ -2,8 +2,7 @@ import { Container, DisplayObject } from 'pixi.js';
 import { PhinaEvent } from '../types';
 import { Updater } from '../Updater';
 import { refugeAnimatedSpriteUpdate } from './refugeUpdateFuncs';
-
-let isExecuted = false;
+import { StyleOption, defaultOption } from './styleOption';
 
 // Extend declaration
 declare module 'pixi.js' {
@@ -18,55 +17,67 @@ declare module 'pixi.js' {
   }
 }
 
+let isExecuted = false;
+
 /**
  * Apply phina.js style
  *
- * - "rotation" to degree base
+ * - Override "rotation" to degree base
  * - Enable executing Element "update" method
- * - Refuge original "update" funcs used in pixi objects
+ *   + Refuge original "update" funcs used in pixi objects
  *
  * @caveats
  * This feature is experimental
  *
  */
-export default function () {
+export default function (options: Partial<StyleOption>) {
   if (isExecuted) return;
   isExecuted = true;
 
-  // Override "rotation" setter to recognize value as degree unit
-  Object.defineProperty(DisplayObject.prototype, 'rotation', {
-    set: function (v: number) {
+  const optionFulFulled: StyleOption = Object.assign(
+    {},
+    defaultOption,
+    options
+  );
+
+  if (optionFulFulled.rotationAsDegree) {
+    // Override rotation setter
+    Object.defineProperty(DisplayObject.prototype, 'rotation', {
+      set: function (v: number) {
+        this.angle = v;
+      },
+      enumerable: false,
+      configurable: true,
+    });
+
+    // Override setRotation
+    DisplayObject.prototype.setRotation = function (v: number) {
       this.angle = v;
-    },
-    enumerable: false,
-    configurable: true,
-  });
+      return this;
+    };
+  }
 
-  // Override "setRotation" to recognize value as degree unit
-  DisplayObject.prototype.setRotation = function (v: number) {
-    this.angle = v;
-    return this;
-  };
+  if (optionFulFulled.enableUpdateMethod) {
+    // "update" method refuging
+    refugeAnimatedSpriteUpdate();
 
-  // "update" method refuging
-  refugeAnimatedSpriteUpdate();
+    // Let Updater execute "update" too
+    Updater.prototype.updateElement = function (obj: Container) {
+      if (obj.awake === false) return;
 
-  // Let Updater execute "update" too
-  Updater.prototype.updateElement = function (obj: Container) {
-    if (obj.awake === false) return;
+      obj.emit(PhinaEvent.Enterframe, { app: this.app });
 
-    obj.emit(PhinaEvent.Enterframe, { app: this.app });
+      // Add
+      if ((obj as any).update) (obj as any).update(this.app);
+      if (obj.onUpdate) obj.onUpdate(this.app);
 
-    // Add
-    if ((obj as any).update) (obj as any).update(this.app);
-    if (obj.onUpdate) obj.onUpdate(this.app);
-
-    if (obj.children && obj.children.length) {
-      const cloneChildren = obj.children.slice(0);
-      for (let i = 0, len = cloneChildren.length; i < len; i++) {
-        const ch = cloneChildren[i] as Container;
-        this.updateElement(ch);
+      if (obj.children && obj.children.length) {
+        const cloneChildren = obj.children.slice(0);
+        for (let i = 0, len = cloneChildren.length; i < len; i++) {
+          const ch = cloneChildren[i] as Container;
+          this.updateElement(ch);
+        }
       }
-    }
-  };
+    };
+  }
 }
