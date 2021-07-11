@@ -17,8 +17,6 @@ declare module 'pixi.js' {
   }
 }
 
-let isExecuted = false;
-
 /**
  * Apply phina.js style
  *
@@ -31,9 +29,6 @@ let isExecuted = false;
  *
  */
 export default function (options: Partial<StyleOption>) {
-  if (isExecuted) return;
-  isExecuted = true;
-
   const optionFulFulled: StyleOption = Object.assign(
     {},
     defaultOption,
