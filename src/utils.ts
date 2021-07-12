@@ -23,3 +23,12 @@ export function toHex(strOrNum: string | number): number {
 export function clamp(target: number, min: number, max: number): number {
   return Math.min(Math.max(target, min), max);
 }
+
+/**
+ * Event stop helper
+ * @param e
+ */
+export const stopEvent = function (e: Event) {
+  e.preventDefault();
+  e.stopPropagation();
+};

@@ -1,6 +1,7 @@
 import phina from 'phina.js';
 import { BaseApp, BaseAppOptions } from './BaseApp';
 import { PhinaEvent, PhinaKeyBoardEvent } from './types';
+import { stopEvent } from './utils';
 const {
   Mouse: MouseInput, // m as n の代わり
   Touch,
@@ -33,13 +34,15 @@ export class DomApp extends BaseApp {
     ) as unknown) as phina.input.TouchList;
     this.keyboard = new Keyboard(document.body);
 
-    // ポインタをセット(PCではMouse, MobileではTouch)
+    // Assign pointer props
     this.pointer = this.touch;
     this.pointers = this.touchList.touches;
+    // For mobile: Use Touch
     this.domElement.addEventListener('touchstart', () => {
       this.pointer = this.touch;
       this.pointers = this.touchList.touches;
     });
+    // For desktop: Use Mouse
     this.domElement.addEventListener('mouseover', () => {
       this.pointer = this.mouse;
       this.pointers = [this.mouse];
@@ -69,9 +72,9 @@ export class DomApp extends BaseApp {
     // var eventName = phina.isMobile() ? 'touchend' : 'mouseup';
     // this.domElement.addEventListener(eventName, this._checkClick.bind(this));
 
-    // // 決定時の処理をオフにする(iPhone 時のちらつき対策)
-    // this.domElement.addEventListener("touchstart", e => e.stop());
-    // this.domElement.addEventListener("touchmove", e => e.stop());
+    // Avoid unnecessary default action by touching app domElement
+    this.domElement.addEventListener('touchstart', e => stopEvent(e));
+    this.domElement.addEventListener('touchmove', e => stopEvent(e));
 
     // ウィンドウフォーカス時イベントリスナを登録
     window.addEventListener(
