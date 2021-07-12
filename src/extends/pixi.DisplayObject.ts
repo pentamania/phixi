@@ -3,6 +3,7 @@ import phina from 'phina.js';
 import { addGetter, addMethod, addAccessor } from './utils';
 import { PhinaEvent } from '../types';
 import { BaseApp } from '../BaseApp';
+import { LibConfig } from '../libConfig';
 
 interface PhinaAccessoryOverride extends phina.accessory.Accessory {
   update?: (app?: any) => any;
@@ -218,7 +219,11 @@ addMethod(DisplayObject.prototype, 'setScale', function (x: number, y = x) {
  * PIXI.DisplayObject.setRotation
  */
 addMethod(DisplayObject.prototype, 'setRotation', function (v: number) {
-  this.rotation = v;
+  if (LibConfig.setRotationAsDegree) {
+    this.angle = v;
+  } else {
+    this.rotation = v;
+  }
   return this;
 });
 

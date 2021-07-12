@@ -1,5 +1,6 @@
 import { Container } from 'pixi.js';
 import { BaseApp } from './BaseApp';
+import { LibConfig } from './libConfig';
 import { PhinaEvent } from './types';
 
 export class Updater {
@@ -26,7 +27,8 @@ export class Updater {
 
     obj.emit(PhinaEvent.Enterframe, { app: this.app });
 
-    // if (obj.update) obj.update(this.app);
+    // Run update & onUpdate func if exists
+    if (LibConfig.enableUpdateFunc && obj.update) obj.update(this.app);
     if (obj.onUpdate) obj.onUpdate(this.app);
 
     if (obj.children && obj.children.length) {
