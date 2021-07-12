@@ -82,4 +82,8 @@ export function refugeAnimatedSpriteUpdate() {
       }
     },
   });
+
+  // Disable "update"
+  // @ts-ignore
+  AnimatedSprite.prototype.update = undefined;
 }
