@@ -1,4 +1,4 @@
-import phina from 'phina.js';
+import { phina } from 'phina.js';
 import { Container } from 'pixi.js';
 import { BaseApp } from './BaseApp';
 import { PhinaEvent } from './types';

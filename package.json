@@ -27,16 +27,14 @@
     "phina.js"
   ],
   "peerDependencies": {
-    "phina.js": "0.2.x",
+    "phina.js": "npm:@pentamania/phina-es",
     "pixi.js": "5.x"
   },
-  "dependencies": {
-    "phina.js.d.ts": "github:negiwine/phina.js.d.ts"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-replace": "^2.3.3",
+    "phina.js": "npm:@pentamania/phina-es@0.0.3",
     "pixi.js": "^5.3.0",
-    "phina.js": "github:pentamania/phina.js#pxb-core",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.26.6",

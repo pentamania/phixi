@@ -1,4 +1,4 @@
-import phina from 'phina.js';
+import { AssetLoader } from 'phina.js';
 import { Gauge } from './Gauge';
 import { Scene } from './Scene';
 import { PhinaAssetLoaderLoadParam, PhinaEvent } from './types';
@@ -30,7 +30,7 @@ export class LoadingScene extends Scene implements LoadingSceneInterface {
    * @param assets
    */
   load(assets: PhinaAssetLoaderLoadParam) {
-    var loader = phina.asset.AssetLoader();
+    var loader = new AssetLoader();
     loader.on('progress', (e: any) => {
       this.gauge.value = e.progress * 100;
     });

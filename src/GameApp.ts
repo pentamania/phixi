@@ -1,4 +1,4 @@
-import phina from 'phina.js';
+import { Canvas as PhinaCanvas } from 'phina.js';
 import { BaseAppOptions } from './BaseApp';
 import { DomApp } from './DomApp';
 import { LoadingScene } from './LoadingScene';
@@ -6,7 +6,6 @@ import { ResultScene } from './ResultScene';
 import { SceneData, ManagerSceneParam, SequenceManagerScene } from './Scene';
 import { TitleScene } from './TitleScene';
 import { PhinaAssetLoaderLoadParam, PhinaEvent } from './types';
-const { Canvas: PhinaCanvas } = phina.graphics;
 
 // Default parameters
 const DEFAULT_START_LABEL = 'title';

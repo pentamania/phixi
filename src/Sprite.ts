@@ -10,25 +10,32 @@ import { AssetType } from './types';
 type PixiTextureOrKey = PixiTexture | string;
 
 // Override phina FrameAnimation._updateFrame
+// @ts-ignore: _updateFrame is protected...
 FrameAnimation.prototype._updateFrame = function (): void {
   if (!this.currentAnimation) return;
+  if (!this.target) return;
 
   var anim = this.currentAnimation;
+  // @ts-ignore: currentFrameIndex protected
   if (this.currentFrameIndex >= anim.frames.length) {
     if (anim.next) {
       this.gotoAndPlay(anim.next);
       return;
     } else {
       this.paused = true;
+      // @ts-ignore: is protected
       this.finished = true;
       return;
     }
   }
 
+  // @ts-ignore: currentFrameIndex protected
   var index = anim.frames[this.currentFrameIndex];
   var frame = this.ss.getFrame(index);
 
-  let sprite: PhinaSprite | PixiSprite = this.target;
+  let sprite: PhinaSprite | PixiSprite = this.target as
+    | PhinaSprite
+    | PixiSprite;
   if (
     (sprite as PixiSprite).texture &&
     (sprite as PixiSprite).texture instanceof PixiTexture
@@ -41,8 +48,12 @@ FrameAnimation.prototype._updateFrame = function (): void {
     sprite.texture.updateUvs();
   } else {
     // Original phina Sprite
-    // PhinaSprite should have srcRect, but is missed in phina.js.d.ts...
-    (sprite as any).srcRect.set(frame.x, frame.y, frame.width, frame.height);
+    (sprite as PhinaSprite).srcRect.set(
+      frame.x,
+      frame.y,
+      frame.width,
+      frame.height
+    );
   }
 
   // Disable fitting

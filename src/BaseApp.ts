@@ -19,7 +19,7 @@ const DEFAULT_PARAMS = {
 export class BaseApp extends utils.EventEmitter {
   renderer: Renderer;
   updater: Updater;
-  ticker: phina.util.Ticker = new PhinaTicker(); // 更新用ticker： 任意のタイミングで更新
+  ticker: PhinaTicker = new PhinaTicker(); // 更新用ticker： 任意のタイミングで更新
   drawTicker = new PixiTicker(); // 描画用ticker：RAFベース（端末によって更新タイミング変わる）
   private _scenes: Scene<BaseApp>[] = [new Scene()];
   private _sceneIndex: number = 0;

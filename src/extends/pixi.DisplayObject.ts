@@ -1,13 +1,9 @@
 import { DisplayObject } from 'pixi.js';
-import { Tweener } from 'phina.js';
+import { Accessory, Tweener } from 'phina.js';
 import { addGetter, addMethod, addAccessor } from './utils';
 import { PhinaEvent } from '../types';
 import { BaseApp } from '../BaseApp';
 import { LibConfig } from '../libConfig';
-
-interface PhinaAccessoryOverride extends phina.accessory.Accessory {
-  update?: (app?: any) => any;
-}
 
 declare module 'pixi.js' {
   export interface DisplayObject {
@@ -15,28 +11,28 @@ declare module 'pixi.js' {
      * Attach phina.accessory
      * @param accessory - phina.accessory.Accessory instance to attach
      */
-    attach(accessory: phina.accessory.Accessory): this;
+    attach(accessory: Accessory): this;
 
     /**
      * Remove attached phina.accessory
      * @param accessory - phina.accessory.Accessory instance to detach
      */
-    detach(accessory: phina.accessory.Accessory): this;
+    detach(accessory: Accessory): this;
 
     /**
      * Private tweener
      */
-    _tweener?: phina.accessory.Tweener;
+    _tweener?: Tweener;
 
     /**
      * Getter for phina.accessory.Tweener
      */
-    tweener: phina.accessory.Tweener;
+    tweener: Tweener;
 
     /**
      * Array of phina.accessory.Accessory
      */
-    accessories?: PhinaAccessoryOverride[];
+    accessories?: Accessory[];
 
     /**
      * Updating flag of the object.
@@ -120,27 +116,25 @@ DisplayObject.prototype.awake = true;
  * @param accessory phina.accessory.Accessory派生クラス（tweenerなど）
  * @returns this
  */
-addMethod(
-  DisplayObject.prototype,
-  'attach',
-  function (accessory: phina.accessory.Accessory) {
-    if (!this.accessories) {
-      this.accessories = [];
-      this.on(PhinaEvent.Enterframe, (e: { app: BaseApp }) => {
-        if (!this.accessories) return;
-        this.accessories.forEach(accessory => {
-          accessory.update && accessory.update(e.app);
-        });
+addMethod(DisplayObject.prototype, 'attach', function (accessory: Accessory) {
+  if (!this.accessories) {
+    this.accessories = [];
+    this.on(PhinaEvent.Enterframe, (e: { app: BaseApp }) => {
+      if (!this.accessories) return;
+      this.accessories.forEach(accessory => {
+        // TODO: Clear tag after phina-es update
+        // @ts-ignore: Accessory.update suppose to be public
+        accessory.update && accessory.update(e.app);
       });
-    }
-
-    this.accessories.push(accessory);
-    accessory.setTarget((this as unknown) as phina.app.Element);
-    accessory.flare(PhinaEvent.AccessoryAttached);
-
-    return this;
+    });
   }
-);
+
+  this.accessories.push(accessory);
+  accessory.setTarget(this);
+  accessory.flare(PhinaEvent.AccessoryAttached);
+
+  return this;
+});
 
 /**
  * PIXI.DisplayObject.detach
@@ -149,19 +143,14 @@ addMethod(
  * @param accessory phina.accessory.Accessory派生クラス（tweenerなど）
  * @returns this
  */
-addMethod(
-  DisplayObject.prototype,
-  'detach',
-  function (accessory: phina.accessory.Accessory) {
-    if (this.accessories) {
-      // this.accessories.erase(accessory);
-      this.accessories.splice(this.accessories.indexOf(accessory), 1);
-      accessory.target = undefined;
-      accessory.flare(PhinaEvent.AccessoryDetached);
-    }
-    return this;
+addMethod(DisplayObject.prototype, 'detach', function (accessory: Accessory) {
+  if (this.accessories) {
+    this.accessories.splice(this.accessories.indexOf(accessory), 1);
+    accessory.target = undefined;
+    accessory.flare(PhinaEvent.AccessoryDetached);
   }
-);
+  return this;
+});
 
 /**
  * PIXI.DisplayObject getter
@@ -169,9 +158,7 @@ addMethod(
  */
 addGetter(DisplayObject.prototype, 'tweener', function () {
   if (!this._tweener) {
-    this._tweener = new Tweener().attachTo(
-      (this as unknown) as phina.app.Element
-    );
+    this._tweener = new Tweener().attachTo(this);
   }
   return this._tweener;
 });

@@ -1,4 +1,3 @@
-/// <reference path='./declarations.d.ts'/>
 import './extends';
 export * from './Scene';
 export * from './DomApp';
