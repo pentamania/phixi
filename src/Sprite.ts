@@ -2,7 +2,7 @@ import {
   Sprite as PixiSprite,
   LoaderResource,
   Rectangle,
-  Texture,
+  Texture as PixiTexture,
 } from 'pixi.js';
 import phina from 'phina.js';
 import { AssetType } from './types';
@@ -10,7 +10,7 @@ const { FrameAnimation } = phina.accessory;
 const { AssetManager } = phina.asset;
 type PhinaSprite = phina.display.Sprite;
 
-type PixiTextureOrKey = Texture | string;
+type PixiTextureOrKey = PixiTexture | string;
 
 // Override phina FrameAnimation._updateFrame
 FrameAnimation.prototype._updateFrame = function (): void {
@@ -34,7 +34,7 @@ FrameAnimation.prototype._updateFrame = function (): void {
   let sprite: PhinaSprite | PixiSprite = this.target;
   if (
     (sprite as PixiSprite).texture &&
-    (sprite as PixiSprite).texture instanceof Texture
+    (sprite as PixiSprite).texture instanceof PixiTexture
   ) {
     sprite = sprite as PixiSprite;
     sprite.texture.frame.x = frame.x;
@@ -59,7 +59,7 @@ FrameAnimation.prototype._updateFrame = function (): void {
 /**
  * @param texture
  */
-function _cloneTexture(texture: PixiTextureOrKey): Texture {
+function _cloneTexture(texture: PixiTextureOrKey): PixiTexture {
   if (typeof texture === 'string') {
     return Sprite.getTextureByKey(texture).clone();
   } else {
@@ -132,12 +132,12 @@ export class Sprite extends PixiSprite {
       return resrc.texture;
     } else {
       // TODO： warning
-      return PIXI.Texture.EMPTY;
+      return PixiTexture.EMPTY;
     }
   }
 
   static from(
-    source: string | PIXI.Texture | HTMLCanvasElement | HTMLVideoElement
+    source: string | PixiTexture | HTMLCanvasElement | HTMLVideoElement
   ) {
     return PixiSprite.from(source);
   }
