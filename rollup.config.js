@@ -1,20 +1,20 @@
-import replace from '@rollup/plugin-replace'
-import typescript from 'rollup-plugin-typescript2'
-import { terser } from 'rollup-plugin-terser'
-import license from 'rollup-plugin-license'
+import replace from '@rollup/plugin-replace';
+import typescript from 'rollup-plugin-typescript2';
+import { terser } from 'rollup-plugin-terser';
+import license from 'rollup-plugin-license';
 import { name, version, author, license as LICENSE } from './package.json';
 
 // Config
-const libName = "phixi"
-const libNamespace = "phixi"
-const noDeclarationFiles = { compilerOptions: { declaration: false } }
-const externals = Object.keys(require('./package.json').peerDependencies) || []
+const libName = 'phixi';
+const libNamespace = 'phixi';
+const noDeclarationFiles = { compilerOptions: { declaration: false } };
+const externals = Object.keys(require('./package.json').peerDependencies) || [];
 const licenseBanner = `/*!
- * ${ name } ${version}
+ * ${name} ${version}
  * ${LICENSE} Licensed
  *
  * Copyright (C) ${author}
- */`
+ */`;
 
 export default [
   // commonJS
@@ -27,7 +27,7 @@ export default [
     external: externals,
     plugins: [
       typescript({ useTsconfigDeclarationDir: true }),
-      license({banner: licenseBanner})
+      license({ banner: licenseBanner }),
     ],
   },
 
@@ -41,7 +41,7 @@ export default [
     external: externals,
     plugins: [
       typescript({ tsconfigOverride: noDeclarationFiles }),
-      license({banner: licenseBanner})
+      license({ banner: licenseBanner }),
     ],
   },
 
@@ -54,17 +54,17 @@ export default [
       name: `${libNamespace}`,
       globals: {
         'phina.js': 'phina',
-        'pixi.js': 'PIXI'
+        'pixi.js': 'PIXI',
       },
     },
     external: externals,
     plugins: [
       typescript({ tsconfigOverride: noDeclarationFiles }),
       replace({
-        'process.env.NODE_ENV': JSON.stringify('development')
+        'process.env.NODE_ENV': JSON.stringify('development'),
       }),
-      license({banner: licenseBanner})
-    ]
+      license({ banner: licenseBanner }),
+    ],
   },
 
   // UMD Prod
@@ -76,24 +76,24 @@ export default [
       name: `${libNamespace}`,
       globals: {
         'phina.js': 'phina',
-        'pixi.js': 'PIXI'
+        'pixi.js': 'PIXI',
       },
     },
     external: externals,
     plugins: [
       typescript({ tsconfigOverride: noDeclarationFiles }),
       replace({
-        'process.env.NODE_ENV': JSON.stringify('production')
+        'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       terser({
         compress: {
           pure_getters: true,
           unsafe: true,
           unsafe_comps: true,
-          warnings: false
-        }
+          warnings: false,
+        },
       }),
-      license({banner: licenseBanner})
-    ]
-  }
-]
+      license({ banner: licenseBanner }),
+    ],
+  },
+];
