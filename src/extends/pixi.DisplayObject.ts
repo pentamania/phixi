@@ -56,7 +56,14 @@ declare module 'pixi.js' {
      * Run by Updater if defined
      */
     onUpdate?(app?: any): any;
-    // update?(app: any): any
+
+    /**
+     * **(phixi extended: only active when phixi.forcePhinaStyle is executed)**
+     *
+     * App-class driven update function.
+     * Run by Updater if defined
+     */
+    update?(app?: any): any;
 
     /**
      * Chainable object position setting method

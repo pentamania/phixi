@@ -3,19 +3,6 @@ import { LibConfig } from 'src/libConfig';
 import { refugeAnimatedSpriteUpdate } from './refugeUpdateFuncs';
 import { StyleOption, defaultOption } from './styleOption';
 
-// Extend declaration
-declare module 'pixi.js' {
-  export interface DisplayObject {
-    /**
-     * **(phixi extended: only active when phixi.forcePhinaStyle is executed)**
-     *
-     * App-class driven update function.
-     * Run by Updater if defined
-     */
-    update?(app?: any): any;
-  }
-}
-
 /**
  * Apply phina.js style
  *
