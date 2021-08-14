@@ -14,7 +14,7 @@ import { StyleOption, defaultOption } from './styleOption';
  * This feature is experimental
  *
  */
-export default function (options: Partial<StyleOption>) {
+export function applyPhinaFeature(options: Partial<StyleOption>) {
   const optionFulFulled: StyleOption = Object.assign(
     {},
     defaultOption,
