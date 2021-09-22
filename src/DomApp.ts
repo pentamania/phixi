@@ -1,4 +1,10 @@
-import { Mouse as MouseInput, Touch, TouchList, Keyboard } from 'phina.js';
+import {
+  Mouse as MouseInput,
+  Touch,
+  TouchList,
+  Keyboard,
+  Pointer,
+} from 'phina.js';
 import { BaseApp, BaseAppOptions } from './BaseApp';
 import { PhinaEvent } from './types';
 import { stopEvent } from './utils';
@@ -13,8 +19,8 @@ export class DomApp extends BaseApp {
   touch: Touch;
   touchList: TouchList;
   keyboard: Keyboard;
-  pointer: Touch | MouseInput;
-  pointers: (Touch | MouseInput)[];
+  pointer: Pointer;
+  pointers: Pointer[];
 
   constructor(params?: BaseAppOptions) {
     super(params);
