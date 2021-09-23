@@ -4,9 +4,25 @@ Bridge library to use pixi.js like phina.js
 
 # Install
 
-`npm i phixi pixi.js phina.js`
+## npm
 
-npm v6.9+ required
+### v6.9+ (minimum required)
+
+peerDependencies should be maually installed
+
+`npm i phixi@npm:@pentamania/phixi pixi.js phina.js@npm:@pentamania/phina`
+
+### v7.x
+
+peerDependencies are automatically installed
+
+`npm i phixi@npm:@pentamania/phixi`
+
+## yarn
+
+peerDependencies should be maually added
+
+`yarn add phixi@npm:@pentamania/phixi pixi.js phina.js@npm:@pentamania/phina`
 
 # Features
 
