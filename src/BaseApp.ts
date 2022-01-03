@@ -64,9 +64,6 @@ export class BaseApp extends utils.EventEmitter {
    * Sceneスタックを順番にscene描画を行う
    */
   draw() {
-    // if (this.currentScene != null) {
-    //   this.renderer.render(this.currentScene);
-    // }
     this._scenes.forEach((scene, i) => {
       if (i === 0) {
         // 最初のscene描画の時だけclear
