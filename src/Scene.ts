@@ -17,13 +17,6 @@ interface NextSceneOption {
 export class Scene<A extends BaseApp = BaseApp> extends Container {
   protected _app?: A | null;
 
-  constructor() {
-    super();
-    // this.width = params.width;
-    // this.height = params.height;
-    // console.log(params.width, this.width); // this.widthは０になる
-  }
-
   /**
    * @virtual
    * @param app
