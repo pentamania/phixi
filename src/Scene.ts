@@ -27,6 +27,17 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
     this._app = app;
   }
 
+  /**
+   * アプリケーションクラスによるシーンenter処理
+   * 通常はAppが内部的に実行
+   *
+   * @param param
+   */
+  enter(param: { app: BaseApp; prevScene: Scene }) {
+    this.setApp(param.app as A);
+    this.emit(PhinaEvent.EnterScene, param);
+  }
+
   exit(nextLabelOrOption?: string | NextSceneOption, nextArguments?: any) {
     if (!this.app) {
       // TODO: warning

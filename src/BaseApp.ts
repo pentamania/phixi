@@ -86,9 +86,9 @@ export class BaseApp extends utils.EventEmitter {
   }
 
   replaceScene(scene: Scene) {
+    const prevScene = this.currentScene;
     this.currentScene = scene;
-    scene.setApp(this);
-    scene.emit(PhinaEvent.EnterScene, this);
+    scene.enter({ app: this, prevScene });
     return this;
   }
 
@@ -103,6 +103,7 @@ export class BaseApp extends utils.EventEmitter {
     this.flare(PhinaEvent.AppPushScene);
     this.flare(PhinaEvent.AppChangeScene);
 
+    const prevScene = this.currentScene;
     this.currentScene.flare(PhinaEvent.ScenePaused, {
       app: this,
     });
@@ -112,10 +113,7 @@ export class BaseApp extends utils.EventEmitter {
 
     this.flare(PhinaEvent.AppScenePushed);
 
-    scene.setApp(this);
-    scene.flare(PhinaEvent.EnterScene, {
-      app: this,
-    });
+    scene.enter({ app: this, prevScene });
 
     return this;
   }
