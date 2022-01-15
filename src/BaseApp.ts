@@ -6,11 +6,12 @@ import { PhinaEvent, RendererOptions } from './types';
 import { toHex } from './utils';
 const { Ticker: PhinaTicker } = phina.util;
 
-export interface BaseAppOptions extends RendererOptions {
+interface BaseAppExtendedParams {
   fps?: number;
 }
+export type BaseAppOptions = RendererOptions & BaseAppExtendedParams;
 
-const DEFAULT_PARAMS = {
+const DEFAULT_PARAMS: Required<BaseAppExtendedParams> = {
   fps: 60,
 };
 
@@ -26,16 +27,19 @@ export class BaseApp extends utils.EventEmitter {
   private _sceneIndex: number = 0;
 
   /**
-   * @param params
+   * @param options
    */
-  constructor(params?: BaseAppOptions) {
+  constructor(options?: BaseAppOptions) {
     super();
-    params = Object.assign({}, DEFAULT_PARAMS, params);
+    const optionsFulfilled = {
+      ...DEFAULT_PARAMS,
+      ...options,
+    };
 
-    this.renderer = new Renderer(params);
+    this.renderer = new Renderer(optionsFulfilled as RendererOptions);
 
     // ticker, updaterのセットアップ
-    if (params.fps) this.ticker.fps = params.fps;
+    this.ticker.fps = optionsFulfilled.fps;
     this.ticker.tick(this._loop.bind(this));
     this.drawTicker.add(this.draw.bind(this));
     this.updater = new Updater(this);
