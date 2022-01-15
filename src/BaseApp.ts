@@ -42,6 +42,8 @@ export class BaseApp extends utils.EventEmitter {
 
     // シーン移動
     this.replaceScene(new Scene());
+
+    BaseApp._instances.push(this);
   }
 
   /**
@@ -141,6 +143,17 @@ export class BaseApp extends utils.EventEmitter {
     this.flare(PhinaEvent.AppScenePoped);
 
     return scene;
+  }
+
+  private static _instances: BaseApp[] = [];
+
+  /**
+   * 生成済みインスタンスを返す
+   *
+   * @param index
+   */
+  static getInstance(index = 0) {
+    return this._instances[index];
   }
 
   /**
