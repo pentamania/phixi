@@ -12,15 +12,21 @@ interface NextSceneOption {
 }
 
 /**
- * Phixi.Sceneクラス
+ * Phixi.Scene
  */
 export class Scene<A extends BaseApp = BaseApp> extends Container {
+  /**
+   * Core app reference: Not available until {@link enter}
+   * App参照. {@link enter}が実行されるまでnull/undefined
+   */
   protected _app?: A | null;
+
+  /** Scene render texture */
   protected _renderTexture: RenderTexture = RenderTexture.create();
 
   /**
    * @virtual
-   * @param app
+   * @param _app
    */
   onUpdate(_app?: A) {}
 
@@ -39,6 +45,12 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
     this.emit(PhinaEvent.EnterScene, param);
   }
 
+  /**
+   * Exit scene(via app.popScene)
+   *
+   * @param nextLabelOrOption
+   * @param nextArguments Args for next Scene Constucting (For SequenceManagerScene)
+   */
   exit(nextLabelOrOption?: string | NextSceneOption, nextArguments?: any) {
     if (!this.app) {
       // TODO: warning
@@ -46,7 +58,7 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
     }
 
     const app = this.app;
-    let nextlabel;
+    let nextlabel: SceneLabel | undefined;
 
     if (nextLabelOrOption) {
       if (typeof nextLabelOrOption === 'string') {
@@ -62,6 +74,7 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
     app.popScene();
 
     // phina.jsではpopScene側でやっている処理
+    // ManagerSceneによる指定Sceneへの遷移
     if (app.currentScene instanceof SequenceManagerScene) {
       if (nextlabel) {
         app.currentScene.gotoScene(nextlabel, nextArguments);
@@ -74,10 +87,12 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
   }
 
   /**
+   * Re-render renderTexture via App.renderer
+   *
    * @param app App reference
-   * @param resize Resize texture to match app.canvas size.
+   * @param resize Whether to resize texture to match app.canvas size.
    * default: true
-   * @returns
+   * @returns Updated RenderTexture
    */
   public updateRenderTexture(
     app: BaseApp,
@@ -88,13 +103,15 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
     return this._renderTexture;
   }
 
+  /**
+   * Returns renderTexture
+   */
   public getRenderTexture() {
     return this._renderTexture;
   }
 
   /**
-   * @property app
-   * TODO: _appが存在しないときはエラー吐く？
+   * App reference
    */
   get app() {
     return this._app;
@@ -124,15 +141,22 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
     return this._app.renderer.view.width;
   }
 
+  /**
+   * Return app.renderer.screen.width
+   * If no app , returns Container.width (Variates by children)
+   */
   get screenWidth() {
     if (this._app) {
       return this._app.renderer.screen.width;
     } else {
-      // Container.widthを返す。childrenの状態によって変わる
       return this.width;
     }
   }
 
+  /**
+   * Return app.renderer.screen.height
+   * If no app , returns Container.height (Variates by children)
+   */
   get screenHeight() {
     if (this._app) {
       return this._app.renderer.screen.height;
@@ -141,6 +165,11 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
     }
   }
 }
+
+// ===========================
+// SequenceManagerScene
+// 循環参照避けるため、Sceneと同ファイルに定義する必要あり
+// ===========================
 
 export interface SceneData {
   className: string | Constructable;
