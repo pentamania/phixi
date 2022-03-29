@@ -1,5 +1,5 @@
 import phina from 'phina.js';
-import { Container } from 'pixi.js';
+import { Container, RenderTexture } from 'pixi.js';
 import { BaseApp } from './BaseApp';
 import { PhinaEvent } from './types';
 
@@ -16,6 +16,7 @@ interface NextSceneOption {
  */
 export class Scene<A extends BaseApp = BaseApp> extends Container {
   protected _app?: A | null;
+  protected _renderTexture: RenderTexture = RenderTexture.create();
 
   /**
    * @virtual
@@ -70,6 +71,25 @@ export class Scene<A extends BaseApp = BaseApp> extends Container {
     }
 
     return this;
+  }
+
+  /**
+   * @param app App reference
+   * @param resize Resize texture to match app.canvas size.
+   * default: true
+   * @returns
+   */
+  public updateRenderTexture(
+    app: BaseApp,
+    resize: boolean = true
+  ): RenderTexture {
+    if (resize) this._renderTexture.resize(app.view.width, app.view.height);
+    app.renderer.render(this, this._renderTexture);
+    return this._renderTexture;
+  }
+
+  public getRenderTexture() {
+    return this._renderTexture;
   }
 
   /**
