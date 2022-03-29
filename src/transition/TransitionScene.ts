@@ -28,7 +28,7 @@ export class TransitionScene extends Scene {
     };
 
     // After entering scene
-    this.on(PhinaEvent.EnterScene, (e: EnterSceneParam) => {
+    this.on(PhinaEvent.EnterScene, async (e: EnterSceneParam) => {
       const updateDuringTransition = options.updateDuringTransition;
       const { app, prevScene } = e;
 
@@ -37,7 +37,7 @@ export class TransitionScene extends Scene {
       prevScene.updateRenderTexture(app);
 
       // Continually update scenes while transition
-      let _enterframeHandler: () => any;
+      let _enterframeHandler: (() => any) | undefined;
       if (updateDuringTransition && updateDuringTransition !== 'none') {
         _enterframeHandler = () => {
           // Prev scene update
@@ -61,14 +61,14 @@ export class TransitionScene extends Scene {
         this.on(PhinaEvent.Enterframe, _enterframeHandler);
       }
 
-      // Go to nextScene after effect
-      this.transit(prevScene, nextScene, () => {
-        // Remove event listener
-        if (_enterframeHandler)
-          this.off(PhinaEvent.Enterframe, _enterframeHandler);
+      await this.transit(prevScene, nextScene);
 
-        // TODO: pushSceneで行われた場合はnextSceneもpushする？
-        // TODO: Use "exit" for ManagerScene
+      // Remove scene-updating listener
+      if (_enterframeHandler)
+        this.off(PhinaEvent.Enterframe, _enterframeHandler);
+
+      // Go to nextScene next frame
+      this.once(PhinaEvent.Enterframe, () => {
         app.replaceScene(nextScene);
       });
     });
@@ -77,14 +77,14 @@ export class TransitionScene extends Scene {
   /**
    * @virtual
    * Override with your own transition process using scene references.
-   * オーバーライドして自分オリジナルの処理を定義
+   * Always return Promise (or define as async func)
+   *
+   * オーバーライドして自分オリジナルの処理を定義。
+   * Promiseを返すかasyncメソッドとして定義する
    *
    * @param _prevSceneRef
    * @param _nextSceneRef
-   * @param cb
+   * @returns Promise to be resolved
    */
-  transit(_prevSceneRef: Scene, _nextSceneRef: Scene, cb: Function): any {
-    // 終了する際は必ずcbをcall
-    cb();
-  }
+  async transit(_prevSceneRef: Scene, _nextSceneRef: Scene): Promise<any> {}
 }
