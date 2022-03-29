@@ -8,3 +8,4 @@ export * from './GameApp';
 export * from './applyPhinaFeature/entry';
 
 export * from './transition/TransitionScene';
+export * from './transition/TransitionGridShatter';
