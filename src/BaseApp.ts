@@ -19,11 +19,25 @@ const DEFAULT_PARAMS: Required<BaseAppExtendedParams> = {
  * @class BaseApp
  */
 export class BaseApp extends utils.EventEmitter {
+  /** PixiJS renderer */
   renderer: Renderer;
+
+  /** Scene/Element updater */
   updater: Updater;
-  ticker = new PhinaTicker(); // 更新用ticker： 任意のタイミングで更新
-  drawTicker = new PixiTicker(); // 描画用ticker：RAFベース（端末によって更新タイミング変わる）
+
+  /** Ticker for element/input update */
+  ticker = new PhinaTicker();
+
+  /**
+   * Ticker for drawing
+   * RAFベース（端末によって更新タイミング変わる）
+   */
+  drawTicker = new PixiTicker();
+
+  /** Scene stack */
   private _scenes: Scene<BaseApp>[] = [new Scene()];
+
+  /** Current scene index */
   private _sceneIndex: number = 0;
 
   /**
@@ -44,7 +58,6 @@ export class BaseApp extends utils.EventEmitter {
     this.drawTicker.add(this.draw.bind(this));
     this.updater = new Updater(this);
 
-    // シーン移動
     this.replaceScene(new Scene());
 
     BaseApp._instances.push(this);
@@ -81,16 +94,28 @@ export class BaseApp extends utils.EventEmitter {
     });
   }
 
+  /**
+   * Start application
+   */
   run() {
     this.ticker.start();
     this.drawTicker.start();
   }
 
+  /**
+   * Stop application
+   */
   stop() {
     this.ticker.stop();
     this.drawTicker.stop();
   }
 
+  /**
+   * シーン入れ替え
+   *
+   * @param scene
+   * @returns this
+   */
   replaceScene(scene: Scene) {
     const prevScene = this.currentScene;
     this.currentScene = scene;
@@ -176,6 +201,9 @@ export class BaseApp extends utils.EventEmitter {
     return this.renderer.view;
   }
 
+  /**
+   * 現在のScene参照
+   */
   get currentScene(): Scene {
     return this._scenes[this._sceneIndex];
   }
@@ -183,6 +211,9 @@ export class BaseApp extends utils.EventEmitter {
     this._scenes[this._sceneIndex] = v;
   }
 
+  /**
+   * 現在のアプリケーション総フレームカウント
+   */
   get frame(): number {
     return this.ticker.frame;
   }
@@ -196,6 +227,9 @@ export class BaseApp extends utils.EventEmitter {
     return this.ticker.fps;
   }
 
+  /**
+   * 背景色
+   */
   set backgroundColor(v: number | string) {
     this.renderer.backgroundColor = toHex(v);
   }
