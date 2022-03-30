@@ -10,3 +10,4 @@ export * from './applyPhinaFeature/entry';
 export * from './transition/TransitionScene';
 export * from './transition/TransitionFade';
 export * from './transition/TransitionGridShatter';
+export * from './transition/TransitionIntermission';
