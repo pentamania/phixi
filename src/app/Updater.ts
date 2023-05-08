@@ -1,7 +1,7 @@
 import { Container } from 'pixi.js';
 import { BaseApp } from './BaseApp';
-import { LibConfig } from './libConfig';
-import { PhinaEvent } from './types';
+import { LibConfig } from '../libConfig';
+import { PhinaEvent } from '../types';
 
 export class Updater {
   app: BaseApp;

@@ -1,5 +1,5 @@
 import { Sprite } from 'pixi.js';
-import { Scene } from '../Scene';
+import { Scene } from '../app/Scene';
 import { TransitionScene, TransitionSceneOptions } from './TransitionScene';
 
 export interface TransitionFadeOptions extends TransitionSceneOptions {

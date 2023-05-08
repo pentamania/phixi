@@ -2,7 +2,7 @@ import { DisplayObject } from 'pixi.js';
 import phina from 'phina.js';
 import { addGetter, addMethod, addAccessor } from './utils';
 import { PhinaEvent } from '../types';
-import { BaseApp } from '../BaseApp';
+import { BaseApp } from '../app/BaseApp';
 import { LibConfig } from '../libConfig';
 
 interface PhinaAccessoryOverride extends phina.accessory.Accessory {

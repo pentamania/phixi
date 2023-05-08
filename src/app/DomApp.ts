@@ -1,7 +1,7 @@
 import phina from 'phina.js';
 import { BaseApp, BaseAppOptions } from './BaseApp';
-import { PhinaEvent, PhinaKeyBoardEvent } from './types';
-import { stopEvent } from './utils';
+import { PhinaEvent, PhinaKeyBoardEvent } from '../types';
+import { stopEvent } from '../utils';
 const {
   Mouse: MouseInput, // m as n の代わり
   Touch,

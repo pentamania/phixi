@@ -1,9 +1,9 @@
 import phina from 'phina.js';
-import { BaseAppOptions } from './BaseApp';
-import { DomApp } from './DomApp';
+import { BaseAppOptions } from './app/BaseApp';
+import { DomApp } from './app/DomApp';
 import { LoadingScene } from './LoadingScene';
 import { ResultScene } from './ResultScene';
-import { SceneData, ManagerSceneParam, SequenceManagerScene } from './Scene';
+import { SceneData, ManagerSceneParam, SequenceManagerScene } from './app/Scene';
 import { TitleScene } from './TitleScene';
 import { PhinaAssetLoaderLoadParam, PhinaEvent } from './types';
 const { Canvas: PhinaCanvas } = phina.graphics;

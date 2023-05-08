@@ -1,6 +1,6 @@
 import { Container } from 'pixi.js';
-import { BaseApp } from '../BaseApp';
-import { Scene } from '../Scene';
+import { BaseApp } from '../app/BaseApp';
+import { Scene } from '../app/Scene';
 import { Sprite } from '../Sprite';
 import { TransitionScene } from './TransitionScene';
 

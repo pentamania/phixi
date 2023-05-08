@@ -1,5 +1,5 @@
 import { Text } from 'pixi.js';
-import { Scene } from './Scene';
+import { Scene } from './app/Scene';
 import { PhinaEvent } from './types';
 
 /**
