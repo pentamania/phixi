@@ -1,5 +1,5 @@
 import { Graphics } from 'pixi.js';
-import { toHex, clamp } from './utils';
+import { toHex, clamp } from '../utils';
 
 export interface GaugeOptions {
   width?: number;

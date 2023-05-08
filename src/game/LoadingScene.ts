@@ -1,5 +1,5 @@
 import phina from 'phina.js';
-import { Gauge } from '../Gauge';
+import { Gauge } from '../ui/Gauge';
 import { Scene } from '../app/Scene';
 import { PhinaAssetLoaderLoadParam, PhinaEvent } from '../types';
 
