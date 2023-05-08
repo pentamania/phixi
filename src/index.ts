@@ -4,7 +4,7 @@ export * from './app/DomApp';
 export * from './Sprite';
 export * from './Gauge';
 export { PhinaEvent, TweenerUpdateType } from './types';
-export * from './GameApp';
+export * from './game/GameApp';
 export * from './applyPhinaFeature/entry';
 
 export * from './transition/TransitionScene';

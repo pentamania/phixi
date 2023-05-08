@@ -1,6 +1,6 @@
 import { Text } from 'pixi.js';
-import { Scene } from './app/Scene';
-import { PhinaEvent } from './types';
+import { Scene } from '../app/Scene';
+import { PhinaEvent } from '../types';
 
 /**
  * Built-in result scene
