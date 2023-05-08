@@ -14,6 +14,7 @@
     "format": "prettier --write \"{src,test}/**/*.{js,ts}\"",
     "format:check": "prettier --list-different \"{src,test}/**/*.{js,ts}\"",
     "docs": "rimraf docs && typedoc --out docs src/index.ts && touch docs/.nojekyll",
+    "typecheck": "tsc -p . --noEmit",
     "dev": "rollup -c -w",
     "build": "rollup -c"
   },
