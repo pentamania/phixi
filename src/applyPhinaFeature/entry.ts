@@ -1,5 +1,5 @@
 import { DisplayObject } from 'pixi.js';
-import { LibConfig } from 'src/libConfig';
+import { LibConfig } from '../libConfig';
 import { refugeAnimatedSpriteUpdate } from './refugeUpdateFuncs';
 import { StyleOption, defaultOption } from './styleOption';
 
