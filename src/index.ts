@@ -3,6 +3,7 @@ export * from './app/Scene';
 export * from './app/DomApp';
 export * from './Sprite';
 export * from './ui/Gauge';
+export * from './ui/RingGauge';
 export { PhinaEvent, TweenerUpdateType } from './types';
 export * from './game/GameApp';
 export * from './applyPhinaFeature/entry';
