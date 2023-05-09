@@ -1,5 +1,5 @@
 import { Scene } from '../app/Scene';
-import { PhinaEvent } from '../types';
+import { PhinaEvent } from '../core/types';
 
 export type SceneUpdateType = 'both' | 'prev' | 'next' | 'none' | undefined;
 

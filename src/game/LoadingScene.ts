@@ -1,7 +1,7 @@
 import phina from 'phina.js';
 import { Gauge } from '../ui/Gauge';
 import { Scene } from '../app/Scene';
-import { PhinaAssetLoaderLoadParam, PhinaEvent } from '../types';
+import { PhinaAssetLoaderLoadParam, PhinaEvent } from '../core/types';
 
 interface LoadingSceneInterface {
   load: (assets: PhinaAssetLoaderLoadParam) => any;

@@ -5,7 +5,7 @@ import {
   Texture as PixiTexture,
 } from 'pixi.js';
 import phina from 'phina.js';
-import { AssetType } from './types';
+import { AssetType } from './core/types';
 
 const { FrameAnimation } = phina.accessory;
 const { AssetManager } = phina.asset;

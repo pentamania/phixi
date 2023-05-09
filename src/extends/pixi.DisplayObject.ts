@@ -1,7 +1,7 @@
 import { DisplayObject } from 'pixi.js';
 import phina from 'phina.js';
 import { addGetter, addMethod, addAccessor } from './utils';
-import { PhinaEvent } from '../types';
+import { PhinaEvent } from '../core/types';
 import { BaseApp } from '../app/BaseApp';
 import { LibConfig } from '../libConfig';
 

@@ -1,5 +1,5 @@
 import phina from 'phina.js';
-import { AssetType } from '../types';
+import { AssetType } from '../core/types';
 import { loadPixiAsset } from './loader';
 
 /**

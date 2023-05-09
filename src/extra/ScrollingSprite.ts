@@ -1,5 +1,5 @@
 import { Point, TilingSprite } from 'pixi.js';
-import { PhinaEvent } from '../types';
+import { PhinaEvent } from '../core/types';
 
 /**
  * @experimental

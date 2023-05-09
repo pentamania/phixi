@@ -1,7 +1,7 @@
 import phina from 'phina.js';
 import { Container, RenderTexture } from 'pixi.js';
 import { BaseApp } from './BaseApp';
-import { PhinaEvent } from '../types';
+import { PhinaEvent } from '../core/types';
 
 type Constructable = new (...args: any) => any;
 type SceneLabel = string | number;

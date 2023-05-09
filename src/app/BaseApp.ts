@@ -2,8 +2,8 @@ import { utils, Ticker as PixiTicker, Renderer } from 'pixi.js';
 import phina from 'phina.js';
 import { Updater } from './Updater';
 import { Scene } from './Scene';
-import { PhinaEvent, RendererOptions } from '../types';
-import { toHex } from '../math';
+import { PhinaEvent, RendererOptions } from '../core/types';
+import { toHex } from '../core/math';
 const { Ticker: PhinaTicker } = phina.util;
 
 interface BaseAppExtendedParams {

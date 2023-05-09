@@ -9,7 +9,7 @@ import {
   SequenceManagerScene,
 } from '../app/Scene';
 import { TitleScene } from './TitleScene';
-import { PhinaAssetLoaderLoadParam, PhinaEvent } from '../types';
+import { PhinaAssetLoaderLoadParam, PhinaEvent } from '../core/types';
 const { Canvas: PhinaCanvas } = phina.graphics;
 
 // Default parameters

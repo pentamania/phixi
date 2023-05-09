@@ -1,5 +1,5 @@
 import { Graphics } from 'pixi.js';
-import { Rad360, clamp } from '../math';
+import { Rad360, clamp } from '../core/math';
 
 export interface RingGaugeOptions {
   value?: number;
