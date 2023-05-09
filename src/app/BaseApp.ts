@@ -3,7 +3,7 @@ import phina from 'phina.js';
 import { Updater } from './Updater';
 import { Scene } from './Scene';
 import { PhinaEvent, RendererOptions } from '../types';
-import { toHex } from '../utils';
+import { toHex } from '../math';
 const { Ticker: PhinaTicker } = phina.util;
 
 interface BaseAppExtendedParams {
