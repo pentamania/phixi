@@ -14,3 +14,4 @@ export * from './transition/TransitionGridShatter';
 export * from './transition/TransitionIntermission';
 
 export * from './extra/Snake';
+export * from './extra/ScrollingSprite';
