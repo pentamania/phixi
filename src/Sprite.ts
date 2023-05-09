@@ -21,7 +21,7 @@ type PixiTextureOrKey = PixiTexture | string;
  * - Frame animation feature
  */
 export class Sprite extends PixiSprite {
-  _frameIndex: number = 0;
+  private _frameIndex: number = 0;
 
   /**
    * @param texture Texture will be cloned for frame animation
@@ -63,6 +63,13 @@ export class Sprite extends PixiSprite {
     this._frameIndex = index;
 
     return this;
+  }
+
+  public get frameIndex(): number {
+    return this._frameIndex;
+  }
+  public set frameIndex(value: number) {
+    this.setFrameIndex(value);
   }
 
   get srcRect(): Rectangle {
