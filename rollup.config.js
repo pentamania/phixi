@@ -1,6 +1,6 @@
 import replace from '@rollup/plugin-replace';
 import typescript from 'rollup-plugin-typescript2';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import license from 'rollup-plugin-license';
 import { name, version, author, license as LICENSE } from './package.json';
 
@@ -8,6 +8,7 @@ import { name, version, author, license as LICENSE } from './package.json';
 const libName = 'phixi';
 const libNamespace = 'phixi';
 const noDeclarationFiles = { compilerOptions: { declaration: false } };
+const replacePluginCommonOptions = { preventAssignment: true };
 const externals = Object.keys(require('./package.json').peerDependencies) || [];
 const licenseBanner = `/*!
  * ${name} ${version}
@@ -61,6 +62,7 @@ export default [
     plugins: [
       typescript({ tsconfigOverride: noDeclarationFiles }),
       replace({
+        ...replacePluginCommonOptions,
         'process.env.NODE_ENV': JSON.stringify('development'),
       }),
       license({ banner: licenseBanner }),
@@ -83,6 +85,7 @@ export default [
     plugins: [
       typescript({ tsconfigOverride: noDeclarationFiles }),
       replace({
+        ...replacePluginCommonOptions,
         'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       terser({
